@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>scripts/test-features.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AIServiceManager.html">AIServiceManager</a><ul class='methods'><li data-type='method'><a href="AIServiceManager.html#classifyText">classifyText</a></li><li data-type='method'><a href="AIServiceManager.html#generateEmbeddings">generateEmbeddings</a></li><li data-type='method'><a href="AIServiceManager.html#generateText">generateText</a></li><li data-type='method'><a href="AIServiceManager.html#getService">getService</a></li><li data-type='method'><a href="AIServiceManager.html#initialize">initialize</a></li><li data-type='method'><a href="AIServiceManager.html#initializeService">initializeService</a></li><li data-type='method'><a href="AIServiceManager.html#processImage">processImage</a></li></ul></li><li><a href="AdminInterfaceGenerator.html">AdminInterfaceGenerator</a><ul class='methods'><li data-type='method'><a href="AdminInterfaceGenerator.html#generateRoutes">generateRoutes</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#initialize">initialize</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#loadModels">loadModels</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#serveAdminUI">serveAdminUI</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#setupAuthentication">setupAuthentication</a></li></ul></li><li><a href="AuditManager.html">AuditManager</a><ul class='methods'><li data-type='method'><a href="AuditManager.html#createAuditContext">createAuditContext</a></li><li data-type='method'><a href="AuditManager.html#createAuditMiddleware">createAuditMiddleware</a></li><li data-type='method'><a href="AuditManager.html#createAuditTables">createAuditTables</a></li><li data-type='method'><a href="AuditManager.html#executeRightToBeForgotten">executeRightToBeForgotten</a></li><li data-type='method'><a href="AuditManager.html#generateGDPRExport">generateGDPRExport</a></li><li data-type='method'><a href="AuditManager.html#getAccessLogsForEntity">getAccessLogsForEntity</a></li><li data-type='method'><a href="AuditManager.html#getAuditLogsForEntity">getAuditLogsForEntity</a></li><li data-type='method'><a href="AuditManager.html#initialize">initialize</a></li><li data-type='method'><a href="AuditManager.html#logAccess">logAccess</a></li><li data-type='method'><a href="AuditManager.html#logChanges">logChanges</a></li><li data-type='method'><a href="AuditManager.html#sanitizeRequestBody">sanitizeRequestBody</a></li><li data-type='method'><a href="AuditManager.html#shouldAuditRequest">shouldAuditRequest</a></li></ul></li><li><a href="CacheManager.html">CacheManager</a><ul class='methods'><li data-type='method'><a href="CacheManager.html#clearNamespace">clearNamespace</a></li><li data-type='method'><a href="CacheManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="CacheManager.html#delete">delete</a></li><li data-type='method'><a href="CacheManager.html#generateKey">generateKey</a></li><li data-type='method'><a href="CacheManager.html#get">get</a></li><li data-type='method'><a href="CacheManager.html#getOrSet">getOrSet</a></li><li data-type='method'><a href="CacheManager.html#set">set</a></li></ul></li><li><a href="EdgeComputingManager.html">EdgeComputingManager</a><ul class='methods'><li data-type='method'><a href="EdgeComputingManager.html#applyChangesFromEdge">applyChangesFromEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#applyCreateChange">applyCreateChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#applyDeleteChange">applyDeleteChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#applyUpdateChange">applyUpdateChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#deployFunctionToEdge">deployFunctionToEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#executeFunctionOnEdge">executeFunctionOnEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#fetchPendingChanges">fetchPendingChanges</a></li><li data-type='method'><a href="EdgeComputingManager.html#getAllEdgeNodesStatus">getAllEdgeNodesStatus</a></li><li data-type='method'><a href="EdgeComputingManager.html#getEdgeNodeStatus">getEdgeNodeStatus</a></li><li data-type='method'><a href="EdgeComputingManager.html#getPendingChangesForNode">getPendingChangesForNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#initialize">initialize</a></li><li data-type='method'><a href="EdgeComputingManager.html#loadEdgeNodes">loadEdgeNodes</a></li><li data-type='method'><a href="EdgeComputingManager.html#markChangeAsProcessed">markChangeAsProcessed</a></li><li data-type='method'><a href="EdgeComputingManager.html#pushChangesToEdge">pushChangesToEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#registerEdgeNode">registerEdgeNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#signChange">signChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#synchronizeAll">synchronizeAll</a></li><li data-type='method'><a href="EdgeComputingManager.html#synchronizeNode">synchronizeNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#unregisterEdgeNode">unregisterEdgeNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#validateChangeSignature">validateChangeSignature</a></li></ul></li><li><a href="EventManager.html">EventManager</a><ul class='methods'><li data-type='method'><a href="EventManager.html#getEvents">getEvents</a></li><li data-type='method'><a href="EventManager.html#initialize">initialize</a></li><li data-type='method'><a href="EventManager.html#initializeEventStore">initializeEventStore</a></li><li data-type='method'><a href="EventManager.html#initializeMessageQueue">initializeMessageQueue</a></li><li data-type='method'><a href="EventManager.html#publishEvent">publishEvent</a></li><li data-type='method'><a href="EventManager.html#replayEvents">replayEvents</a></li><li data-type='method'><a href="EventManager.html#setupMessageHandlers">setupMessageHandlers</a></li><li data-type='method'><a href="EventManager.html#subscribeToEvent">subscribeToEvent</a></li><li data-type='method'><a href="EventManager.html#unsubscribeFromEvent">unsubscribeFromEvent</a></li></ul></li><li><a href="I18nManager.html">I18nManager</a><ul class='methods'><li data-type='method'><a href="I18nManager.html#changeLanguage">changeLanguage</a></li><li data-type='method'><a href="I18nManager.html#createSampleLocales">createSampleLocales</a></li><li data-type='method'><a href="I18nManager.html#formatCurrency">formatCurrency</a></li><li data-type='method'><a href="I18nManager.html#formatDate">formatDate</a></li><li data-type='method'><a href="I18nManager.html#formatNumber">formatNumber</a></li><li data-type='method'><a href="I18nManager.html#getCurrentLanguage">getCurrentLanguage</a></li><li data-type='method'><a href="I18nManager.html#getMiddleware">getMiddleware</a></li><li data-type='method'><a href="I18nManager.html#getSupportedLanguages">getSupportedLanguages</a></li><li data-type='method'><a href="I18nManager.html#initialize">initialize</a></li><li data-type='method'><a href="I18nManager.html#translate">translate</a></li></ul></li><li><a href="MockDatabase.html">MockDatabase</a></li><li><a href="MockDatabaseClient.html">MockDatabaseClient</a></li><li><a href="MonitoringManager.html">MonitoringManager</a><ul class='methods'><li data-type='method'><a href="MonitoringManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="MonitoringManager.html#getMetricsHandler">getMetricsHandler</a></li><li data-type='method'><a href="MonitoringManager.html#incrementCounter">incrementCounter</a></li><li data-type='method'><a href="MonitoringManager.html#initialize">initialize</a></li><li data-type='method'><a href="MonitoringManager.html#initializeDatadog">initializeDatadog</a></li><li data-type='method'><a href="MonitoringManager.html#initializeNewRelic">initializeNewRelic</a></li><li data-type='method'><a href="MonitoringManager.html#initializePrometheus">initializePrometheus</a></li><li data-type='method'><a href="MonitoringManager.html#initializeProvider">initializeProvider</a></li><li data-type='method'><a href="MonitoringManager.html#recordHistogram">recordHistogram</a></li><li data-type='method'><a href="MonitoringManager.html#recordMetric">recordMetric</a></li><li data-type='method'><a href="MonitoringManager.html#shutdown">shutdown</a></li><li data-type='method'><a href="MonitoringManager.html#startSystemMetricsCollection">startSystemMetricsCollection</a></li><li data-type='method'><a href="MonitoringManager.html#startTimer">startTimer</a></li></ul></li><li><a href="OpenAIService.html">OpenAIService</a><ul class='methods'><li data-type='method'><a href="OpenAIService.html#classifyText">classifyText</a></li><li data-type='method'><a href="OpenAIService.html#generateEmbeddings">generateEmbeddings</a></li><li data-type='method'><a href="OpenAIService.html#generateText">generateText</a></li><li data-type='method'><a href="OpenAIService.html#initialize">initialize</a></li><li data-type='method'><a href="OpenAIService.html#processImage">processImage</a></li></ul></li><li><a href="PluginManager.html">PluginManager</a><ul class='methods'><li data-type='method'><a href="PluginManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="PluginManager.html#executeHooks">executeHooks</a></li><li data-type='method'><a href="PluginManager.html#loadPlugins">loadPlugins</a></li><li data-type='method'><a href="PluginManager.html#register">register</a></li></ul></li><li><a href="PostgresEventStore.html">PostgresEventStore</a><ul class='methods'><li data-type='method'><a href="PostgresEventStore.html#getEvents">getEvents</a></li><li data-type='method'><a href="PostgresEventStore.html#initialize">initialize</a></li><li data-type='method'><a href="PostgresEventStore.html#storeEvent">storeEvent</a></li></ul></li><li><a href="RedisQueue.html">RedisQueue</a><ul class='methods'><li data-type='method'><a href="RedisQueue.html#initialize">initialize</a></li><li data-type='method'><a href="RedisQueue.html#publish">publish</a></li><li data-type='method'><a href="RedisQueue.html#subscribe">subscribe</a></li><li data-type='method'><a href="RedisQueue.html#unsubscribe">unsubscribe</a></li></ul></li><li><a href="SecurityAuditManager.html">SecurityAuditManager</a><ul class='methods'><li data-type='method'><a href="SecurityAuditManager.html#createAuditTables">createAuditTables</a></li><li data-type='method'><a href="SecurityAuditManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="SecurityAuditManager.html#getSecurityAuditLogs">getSecurityAuditLogs</a></li><li data-type='method'><a href="SecurityAuditManager.html#initialize">initialize</a></li><li data-type='method'><a href="SecurityAuditManager.html#logSecurityEvent">logSecurityEvent</a></li><li data-type='method'><a href="SecurityAuditManager.html#shutdown">shutdown</a></li></ul></li><li><a href="SecurityScanner.html">SecurityScanner</a><ul class='methods'><li data-type='method'><a href="SecurityScanner.html#countIssues">countIssues</a></li><li data-type='method'><a href="SecurityScanner.html#findSourceFiles">findSourceFiles</a></li><li data-type='method'><a href="SecurityScanner.html#generateRecommendations">generateRecommendations</a></li><li data-type='method'><a href="SecurityScanner.html#generateReport">generateReport</a></li><li data-type='method'><a href="SecurityScanner.html#getConfigFiles">getConfigFiles</a></li><li data-type='method'><a href="SecurityScanner.html#getJsFiles">getJsFiles</a></li><li data-type='method'><a href="SecurityScanner.html#getLineNumber">getLineNumber</a></li><li data-type='method'><a href="SecurityScanner.html#initialize">initialize</a></li><li data-type='method'><a href="SecurityScanner.html#runAllScans">runAllScans</a></li><li data-type='method'><a href="SecurityScanner.html#runScan">runScan</a></li><li data-type='method'><a href="SecurityScanner.html#saveReport">saveReport</a></li><li data-type='method'><a href="SecurityScanner.html#scanCode">scanCode</a></li><li data-type='method'><a href="SecurityScanner.html#scanCode">scanCode</a></li><li data-type='method'><a href="SecurityScanner.html#scanConfigurations">scanConfigurations</a></li><li data-type='method'><a href="SecurityScanner.html#scanDependencies">scanDependencies</a></li><li data-type='method'><a href="SecurityScanner.html#scanDependencies">scanDependencies</a></li><li data-type='method'><a href="SecurityScanner.html#scanEndpoints">scanEndpoints</a></li><li data-type='method'><a href="SecurityScanner.html#sendEmailNotification">sendEmailNotification</a></li><li data-type='method'><a href="SecurityScanner.html#sendNotifications">sendNotifications</a></li><li data-type='method'><a href="SecurityScanner.html#sendSlackNotification">sendSlackNotification</a></li><li data-type='method'><a href="SecurityScanner.html#shutdown">shutdown</a></li></ul></li><li></li><li><a href="ServerlessAdapter.html">ServerlessAdapter</a><ul class='methods'><li data-type='method'><a href="ServerlessAdapter.html#createAWSHandler">createAWSHandler</a></li><li data-type='method'><a href="ServerlessAdapter.html#createAzureHandler">createAzureHandler</a></li><li data-type='method'><a href="ServerlessAdapter.html#createGCPHandler">createGCPHandler</a></li><li data-type='method'><a href="ServerlessAdapter.html#initialize">initialize</a></li></ul></li><li><a href="TenantManager.html">TenantManager</a><ul class='methods'><li data-type='method'><a href="TenantManager.html#createTenant">createTenant</a></li><li data-type='method'><a href="TenantManager.html#deleteTenant">deleteTenant</a></li><li data-type='method'><a href="TenantManager.html#getTenant">getTenant</a></li><li data-type='method'><a href="TenantManager.html#getTenantByDomain">getTenantByDomain</a></li><li data-type='method'><a href="TenantManager.html#getTenantDatabaseName">getTenantDatabaseName</a></li><li data-type='method'><a href="TenantManager.html#getTenantSchemaName">getTenantSchemaName</a></li><li data-type='method'><a href="TenantManager.html#initialize">initialize</a></li><li data-type='method'><a href="TenantManager.html#loadTenants">loadTenants</a></li><li data-type='method'><a href="TenantManager.html#tenantMiddleware">tenantMiddleware</a></li><li data-type='method'><a href="TenantManager.html#updateTenant">updateTenant</a></li></ul></li><li><a href="ValidationManager.html">ValidationManager</a><ul class='methods'><li data-type='method'><a href="ValidationManager.html#addSchema">addSchema</a></li><li data-type='method'><a href="ValidationManager.html#createValidationMiddleware">createValidationMiddleware</a></li><li data-type='method'><a href="ValidationManager.html#getSchema">getSchema</a></li><li data-type='method'><a href="ValidationManager.html#getSchemaNames">getSchemaNames</a></li><li data-type='method'><a href="ValidationManager.html#validate">validate</a></li></ul></li><li><a href="WorkflowEngine.html">WorkflowEngine</a><ul class='methods'><li data-type='method'><a href="WorkflowEngine.html#cancelWorkflow">cancelWorkflow</a></li><li data-type='method'><a href="WorkflowEngine.html#completeWorkflow">completeWorkflow</a></li><li data-type='method'><a href="WorkflowEngine.html#evaluateCondition">evaluateCondition</a></li><li data-type='method'><a href="WorkflowEngine.html#executeActions">executeActions</a></li><li data-type='method'><a href="WorkflowEngine.html#executeStateActions">executeStateActions</a></li><li data-type='method'><a href="WorkflowEngine.html#executeTransition">executeTransition</a></li><li data-type='method'><a href="WorkflowEngine.html#getWorkflowInstance">getWorkflowInstance</a></li><li data-type='method'><a href="WorkflowEngine.html#getWorkflowInstancesForEntity">getWorkflowInstancesForEntity</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowCancel">handleWorkflowCancel</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowComplete">handleWorkflowComplete</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowStart">handleWorkflowStart</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowTransition">handleWorkflowTransition</a></li><li data-type='method'><a href="WorkflowEngine.html#initialize">initialize</a></li><li data-type='method'><a href="WorkflowEngine.html#loadWorkflows">loadWorkflows</a></li><li data-type='method'><a href="WorkflowEngine.html#mapDatabaseInstanceToObject">mapDatabaseInstanceToObject</a></li><li data-type='method'><a href="WorkflowEngine.html#saveWorkflowInstance">saveWorkflowInstance</a></li><li data-type='method'><a href="WorkflowEngine.html#setupEventListeners">setupEventListeners</a></li><li data-type='method'><a href="WorkflowEngine.html#startWorkflow">startWorkflow</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#$randomEmail">$randomEmail</a></li><li><a href="global.html#applyMiddleware">applyMiddleware</a></li><li><a href="global.html#calculatePercentile">calculatePercentile</a></li><li><a href="global.html#closeConnections">closeConnections</a></li><li><a href="global.html#closeDatabaseConnections">closeDatabaseConnections</a></li><li><a href="global.html#connectDatabases">connectDatabases</a></li><li><a href="global.html#connectMockDatabase">connectMockDatabase</a></li><li><a href="global.html#connectMongoDB">connectMongoDB</a></li><li><a href="global.html#connectPostgres">connectPostgres</a></li><li><a href="global.html#connectRedis">connectRedis</a></li><li><a href="global.html#createMigration">createMigration</a></li><li><a href="global.html#createMigrationsTable">createMigrationsTable</a></li><li><a href="global.html#deepMerge">deepMerge</a></li><li><a href="global.html#generateApiClient">generateApiClient</a></li><li><a href="global.html#generateGraphQLComposables">generateGraphQLComposables</a></li><li><a href="global.html#generateGraphQLHooks">generateGraphQLHooks</a></li><li><a href="global.html#generateIndexFile">generateIndexFile</a></li><li><a href="global.html#generateReactSDK">generateReactSDK</a></li><li><a href="global.html#generateRestComposables">generateRestComposables</a></li><li><a href="global.html#generateRestHooks">generateRestHooks</a></li><li><a href="global.html#generateVueSDK">generateVueSDK</a></li><li><a href="global.html#generateWebSocketComposables">generateWebSocketComposables</a></li><li><a href="global.html#generateWebSocketHooks">generateWebSocketHooks</a></li><li><a href="global.html#getAppliedMigrations">getAppliedMigrations</a></li><li><a href="global.html#getDatabaseClient">getDatabaseClient</a></li><li><a href="global.html#hasRoles">hasRoles</a></li><li><a href="global.html#isAuthenticated">isAuthenticated</a></li><li><a href="global.html#isObject">isObject</a></li><li><a href="global.html#loadConfig">loadConfig</a></li><li><a href="global.html#logger">logger</a></li><li><a href="global.html#mergeResolvers">mergeResolvers</a></li><li><a href="global.html#parseConfigValue">parseConfigValue</a></li><li><a href="global.html#recordMigration">recordMigration</a></li><li><a href="global.html#registerGRPCService">registerGRPCService</a></li><li><a href="global.html#registerModelEventHandlers">registerModelEventHandlers</a></li><li><a href="global.html#registerModelRoutes">registerModelRoutes</a></li><li><a href="global.html#runConcurrentTests">runConcurrentTests</a></li><li><a href="global.html#runMigrations">runMigrations</a></li><li><a href="global.html#runPerformanceTests">runPerformanceTests</a></li><li><a href="global.html#runTests">runTests</a></li><li><a href="global.html#selectRandomProduct">selectRandomProduct</a></li><li><a href="global.html#setNestedValue">setNestedValue</a></li><li><a href="global.html#setupApiKeyStrategy">setupApiKeyStrategy</a></li><li><a href="global.html#setupAuthRoutes">setupAuthRoutes</a></li><li><a href="global.html#setupAuthentication">setupAuthentication</a></li><li><a href="global.html#setupGRPC">setupGRPC</a></li><li><a href="global.html#setupGraphQLSchema">setupGraphQLSchema</a></li><li><a href="global.html#setupHealthChecks">setupHealthChecks</a></li><li><a href="global.html#setupJwtStrategy">setupJwtStrategy</a></li><li><a href="global.html#setupMonitoring">setupMonitoring</a></li><li><a href="global.html#setupMySQL">setupMySQL</a></li><li><a href="global.html#setupOAuth2Strategies">setupOAuth2Strategies</a></li><li><a href="global.html#setupRESTApi">setupRESTApi</a></li><li><a href="global.html#setupRateLimiting">setupRateLimiting</a></li><li><a href="global.html#setupWebSockets">setupWebSockets</a></li><li><a href="global.html#simpleTest">simpleTest</a></li><li><a href="global.html#tenantContextMiddleware">tenantContextMiddleware</a></li><li><a href="global.html#testAI">testAI</a></li><li><a href="global.html#testAIServices">testAIServices</a></li><li><a href="global.html#testAsyncFunction">testAsyncFunction</a></li><li><a href="global.html#testAudit">testAudit</a></li><li><a href="global.html#testCache">testCache</a></li><li><a href="global.html#testEdgeComputing">testEdgeComputing</a></li><li><a href="global.html#testEndpoint">testEndpoint</a></li><li><a href="global.html#testEventSystem">testEventSystem</a></li><li><a href="global.html#testEvents">testEvents</a></li><li><a href="global.html#testFeatures">testFeatures</a></li><li><a href="global.html#testI18n">testI18n</a></li><li><a href="global.html#testMultiTenant">testMultiTenant</a></li><li><a href="global.html#testSecurity">testSecurity</a></li><li><a href="global.html#testValidation">testValidation</a></li><li><a href="global.html#testWorkflow">testWorkflow</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">scripts/test-features.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const logger = require('../core/utils/logger');
+const { loadConfig } = require('../config');
+const { connectDatabases } = require('../core/database');
+const TenantManager = require('../core/multi-tenant');
+const eventManager = require('../core/events');
+const aiServiceManager = require('../core/ai');
+const ValidationManager = require('../core/validation');
+const I18nManager = require('../core/i18n');
+const WorkflowEngine = require('../core/workflow');
+const AuditManager = require('../core/audit');
+const EdgeComputingManager = require('../core/edge');
+
+// Add these variables at the top of the file
+let passed = 0;
+let failed = 0;
+let startTime = Date.now();
+
+/**
+ * Test all advanced features
+ */
+async function testFeatures() {
+  try {
+    logger.info('Starting feature tests...');
+    
+    // Load configuration
+    const config = loadConfig();
+    
+    // Connect to databases
+    const connections = await connectDatabases(config.databases);
+    logger.info('✅ Database connections established');
+    
+    // Test multi-tenant support
+    await testMultiTenant(config, connections);
+    
+    // Test event system
+    await testEventSystem(config, connections);
+    
+    // Test AI services
+    await testAIServices(config);
+    
+    // Test validation
+    await testValidation(config);
+    
+    // Test internationalization
+    await testI18n(config);
+    
+    // Test workflow engine
+    await testWorkflow(config, connections);
+    
+    // Test audit system
+    await testAudit(config, connections);
+    
+    // Test edge computing
+    await testEdgeComputing(config);
+    
+    logger.info('✅ All feature tests completed successfully');
+    
+    // Close database connections
+    await closeConnections(connections);
+    
+    // Calculate total time
+    const totalTime = Date.now() - startTime;
+
+    // Replace the console.log with logger
+    logger.info(
+      `Feature test complete. ${passed} tests passed, ${failed} tests failed. ` +
+      `Total execution time: ${totalTime}ms`
+    );
+    
+    process.exit(0);
+  } catch (error) {
+    logger.error('❌ Feature tests failed:', error);
+    process.exit(1);
+  }
+}
+
+/**
+ * Test multi-tenant support
+ */
+async function testMultiTenant(config, connections) {
+  try {
+    if (!config.multiTenant || !config.multiTenant.enabled) {
+      logger.info('⏩ Multi-tenant support not enabled, skipping test');
+      return;
+    }
+    
+    const tenantManager = new TenantManager(config.multiTenant, connections);
+    await tenantManager.initialize();
+    
+    // Create a test tenant
+    const tenant = await tenantManager.createTenant({
+      name: 'Test Tenant',
+      domain: 'test.example.com',
+      config: { theme: 'light' }
+    });
+    
+    logger.info(`Created test tenant: ${tenant.name} (${tenant.id})`);
+    
+    // Get tenant by ID
+    const retrievedTenant = await tenantManager.getTenantById(tenant.id);
+    logger.info(`Retrieved tenant: ${retrievedTenant.name}`);
+    
+    // Delete test tenant
+    await tenantManager.deleteTenant(tenant.id);
+    logger.info(`Deleted test tenant: ${tenant.id}`);
+    
+    logger.info('✅ Multi-tenant test completed');
+  } catch (error) {
+    logger.error('❌ Multi-tenant test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test event system
+ */
+async function testEventSystem(config, connections) {
+  try {
+    if (!config.events || !config.events.enabled) {
+      logger.info('⏩ Event system not enabled, skipping test');
+      return;
+    }
+    
+    eventManager.config = config.events;
+    eventManager.connections = connections;
+    await eventManager.initialize();
+    
+    // Subscribe to test event
+    const unsubscribe = eventManager.subscribeToEvent('test:event', (data) => {
+      logger.info(`Received test event with data: ${JSON.stringify(data)}`);
+    });
+    
+    // Publish test event
+    await eventManager.publishEvent('test:event', { message: 'Hello, World!' });
+    logger.info('Published test event');
+    
+    // Unsubscribe from test event
+    unsubscribe();
+    
+    logger.info('✅ Event system test completed');
+  } catch (error) {
+    logger.error('❌ Event system test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test AI services
+ */
+async function testAIServices(config) {
+  try {
+    if (!config.ai || !config.ai.enabled) {
+      logger.info('⏩ AI services not enabled, skipping test');
+      return;
+    }
+    
+    aiServiceManager.config = config.ai;
+    await aiServiceManager.initialize();
+    
+    // If OpenAI is configured, test text generation
+    if (config.ai.services &amp;&amp; config.ai.services.openai &amp;&amp; config.ai.services.openai.enabled) {
+      try {
+        const result = await aiServiceManager.generateText('openai', 'Say hello in three words');
+        logger.info(`AI generated text: ${result.text}`);
+      } catch (error) {
+        logger.warn('OpenAI test skipped (API key may be missing):', error.message);
+      }
+    }
+    
+    logger.info('✅ AI services test completed');
+  } catch (error) {
+    logger.error('❌ AI services test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test validation
+ */
+async function testValidation(config) {
+  try {
+    const validationManager = new ValidationManager(config.validation || {});
+    
+    // Create a schema
+    const schema = {
+      type: 'object',
+      properties: {
+        name: { type: 'string', minLength: 2 },
+        email: { type: 'string', format: 'email' },
+        age: { type: 'number', minimum: 18 }
+      },
+      required: ['name', 'email']
+    };
+    
+    // Valid data
+    const validData = {
+      name: 'John Doe',
+      email: 'john@example.com',
+      age: 25
+    };
+    
+    // Invalid data
+    const invalidData = {
+      name: 'J',
+      email: 'not-an-email',
+      age: 16
+    };
+    
+    // Validate data
+    const validResult = validationManager.validate(schema, validData);
+    logger.info(`Valid data validation result: ${validResult.valid}`);
+    
+    const invalidResult = validationManager.validate(schema, invalidData);
+    logger.info(`Invalid data validation result: ${invalidResult.valid}`);
+    logger.info(`Validation errors: ${JSON.stringify(invalidResult.errors)}`);
+    
+    // Test transformation
+    const transformations = {
+      name: { transform: 'trim' },
+      email: { transform: 'lowercase' }
+    };
+    
+    const dataToTransform = {
+      name: '  John Doe  ',
+      email: 'JOHN@EXAMPLE.COM'
+    };
+    
+    const transformed = validationManager.transform(dataToTransform, transformations);
+    logger.info(`Transformed data: ${JSON.stringify(transformed)}`);
+    
+    logger.info('✅ Validation test completed');
+  } catch (error) {
+    logger.error('❌ Validation test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test internationalization
+ */
+async function testI18n(config) {
+  try {
+    if (!config.i18n || !config.i18n.enabled) {
+      logger.info('⏩ Internationalization not enabled, skipping test');
+      return;
+    }
+    
+    const i18nManager = new I18nManager(config.i18n);
+    await i18nManager.initialize();
+    
+    // Test translation
+    const enTranslation = i18nManager.translate('welcome');
+    logger.info(`English translation: ${enTranslation}`);
+    
+    // Change language
+    await i18nManager.changeLanguage('es');
+    const esTranslation = i18nManager.translate('welcome');
+    logger.info(`Spanish translation: ${esTranslation}`);
+    
+    // Test formatting
+    const date = new Date();
+    const formattedDate = i18nManager.formatDate(date);
+    logger.info(`Formatted date: ${formattedDate}`);
+    
+    const number = 1234567.89;
+    const formattedNumber = i18nManager.formatNumber(number);
+    logger.info(`Formatted number: ${formattedNumber}`);
+    
+    const amount = 1234.56;
+    const formattedCurrency = i18nManager.formatCurrency(amount, 'EUR');
+    logger.info(`Formatted currency: ${formattedCurrency}`);
+    
+    logger.info('✅ Internationalization test completed');
+  } catch (error) {
+    logger.error('❌ Internationalization test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test workflow engine
+ */
+async function testWorkflow(config, connections) {
+  try {
+    if (!config.workflow || !config.workflow.enabled) {
+      logger.info('⏩ Workflow engine not enabled, skipping test');
+      return;
+    }
+    
+    const workflowEngine = new WorkflowEngine(config.workflow, connections);
+    await workflowEngine.initialize();
+    
+    // Create a test workflow
+    const workflow = {
+      name: 'Test Workflow',
+      description: 'A test workflow',
+      states: {
+        start: { type: 'start' },
+        pending: { type: 'task' },
+        approved: { type: 'end' },
+        rejected: { type: 'end' }
+      },
+      transitions: [
+        { from: 'start', to: 'pending', condition: 'true' },
+        { from: 'pending', to: 'approved', condition: 'data.approved === true' },
+        { from: 'pending', to: 'rejected', condition: 'data.approved === false' }
+      ],
+      startState: 'start',
+      endStates: ['approved', 'rejected']
+    };
+    
+    const createdWorkflow = await workflowEngine.createWorkflow(workflow);
+    logger.info(`Created workflow: ${createdWorkflow.name} (${createdWorkflow.id})`);
+    
+    // Start a workflow instance
+    const instance = await workflowEngine.startWorkflow(createdWorkflow.id, {
+      entityType: 'order',
+      entityId: 'test-order-123',
+      data: { amount: 100 }
+    });
+    
+    logger.info(`Started workflow instance: ${instance.id} (State: ${instance.currentState})`);
+    
+    // Transition to next state
+    const transitionedInstance = await workflowEngine.transitionWorkflow(instance.id, {
+      approved: true
+    });
+    
+    logger.info(`Transitioned workflow instance: ${transitionedInstance.id} (State: ${transitionedInstance.currentState})`);
+    
+    logger.info('✅ Workflow engine test completed');
+  } catch (error) {
+    logger.error('❌ Workflow engine test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test audit system
+ */
+async function testAudit(config, connections) {
+  try {
+    if (!config.audit || !config.audit.enabled) {
+      logger.info('⏩ Audit system not enabled, skipping test');
+      return;
+    }
+    
+    const auditManager = new AuditManager(config.audit, connections);
+    await auditManager.initialize();
+    
+    // Log a change
+    await auditManager.logChanges({
+      userId: 'test-user',
+      action: 'CREATE',
+      entityType: 'product',
+      entityId: 'test-product-123',
+      changes: { name: 'Test Product', price: 99.99 },
+      metadata: { source: 'test-script' },
+      ipAddress: '127.0.0.1',
+      userAgent: 'Test Script'
+    });
+    
+    logger.info('Logged test change');
+    
+    // Log data access
+    await auditManager.logDataAccess({
+      userId: 'test-user',
+      action: 'READ',
+      entityType: 'product',
+      entityId: 'test-product-123',
+      fields: ['name', 'price'],
+      query: { id: 'test-product-123' },
+      ipAddress: '127.0.0.1',
+      userAgent: 'Test Script'
+    });
+    
+    logger.info('Logged test data access');
+    
+    // Get audit logs
+    const logs = await auditManager.getAuditLogs({
+      userId: 'test-user',
+      entityType: 'product'
+    });
+    
+    logger.info(`Retrieved ${logs.length} audit logs`);
+    
+    logger.info('✅ Audit system test completed');
+  } catch (error) {
+    logger.error('❌ Audit system test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Test edge computing
+ */
+async function testEdgeComputing(config) {
+  try {
+    if (!config.edge || !config.edge.enabled) {
+      logger.info('⏩ Edge computing not enabled, skipping test');
+      return;
+    }
+    
+    const edgeManager = new EdgeComputingManager(config.edge);
+    await edgeManager.initialize();
+    
+    // Register a test edge node
+    const node = await edgeManager.registerEdgeNode({
+      name: 'Test Edge Node',
+      url: 'http://localhost:3001',
+      capabilities: ['functions', 'storage']
+    });
+    
+    logger.info(`Registered edge node: ${node.name} (${node.id})`);
+    
+    // Get edge node status
+    const status = edgeManager.getEdgeNodeStatus(node.id);
+    logger.info(`Edge node status: ${status.status}`);
+    
+    // Unregister edge node
+    await edgeManager.unregisterEdgeNode(node.id);
+    logger.info(`Unregistered edge node: ${node.id}`);
+    
+    logger.info('✅ Edge computing test completed');
+  } catch (error) {
+    logger.error('❌ Edge computing test failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Close database connections
+ */
+async function closeConnections(connections) {
+  try {
+    for (const [name, connection] of Object.entries(connections)) {
+      if (connection &amp;&amp; typeof connection.close === 'function') {
+        await connection.close();
+        logger.info(`Closed ${name} connection`);
+      } else if (connection &amp;&amp; typeof connection.end === 'function') {
+        await connection.end();
+        logger.info(`Ended ${name} connection`);
+      } else if (connection &amp;&amp; typeof connection.disconnect === 'function') {
+        await connection.disconnect();
+        logger.info(`Disconnected ${name} connection`);
+      }
+    }
+    
+    logger.info('✅ All database connections closed');
+  } catch (error) {
+    logger.error('❌ Failed to close database connections:', error);
+  }
+}
+
+// Run tests
+testFeatures(); </code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AIServiceManager.html">AIServiceManager</a><ul class='methods'><li data-type='method'><a href="AIServiceManager.html#classifyText">classifyText</a></li><li data-type='method'><a href="AIServiceManager.html#generateEmbeddings">generateEmbeddings</a></li><li data-type='method'><a href="AIServiceManager.html#generateText">generateText</a></li><li data-type='method'><a href="AIServiceManager.html#getService">getService</a></li><li data-type='method'><a href="AIServiceManager.html#initialize">initialize</a></li><li data-type='method'><a href="AIServiceManager.html#initializeService">initializeService</a></li><li data-type='method'><a href="AIServiceManager.html#processImage">processImage</a></li></ul></li><li><a href="AdminInterfaceGenerator.html">AdminInterfaceGenerator</a><ul class='methods'><li data-type='method'><a href="AdminInterfaceGenerator.html#generateRoutes">generateRoutes</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#initialize">initialize</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#loadModels">loadModels</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#serveAdminUI">serveAdminUI</a></li><li data-type='method'><a href="AdminInterfaceGenerator.html#setupAuthentication">setupAuthentication</a></li></ul></li><li><a href="AuditManager.html">AuditManager</a><ul class='methods'><li data-type='method'><a href="AuditManager.html#createAuditContext">createAuditContext</a></li><li data-type='method'><a href="AuditManager.html#createAuditMiddleware">createAuditMiddleware</a></li><li data-type='method'><a href="AuditManager.html#createAuditTables">createAuditTables</a></li><li data-type='method'><a href="AuditManager.html#executeRightToBeForgotten">executeRightToBeForgotten</a></li><li data-type='method'><a href="AuditManager.html#generateGDPRExport">generateGDPRExport</a></li><li data-type='method'><a href="AuditManager.html#getAccessLogsForEntity">getAccessLogsForEntity</a></li><li data-type='method'><a href="AuditManager.html#getAuditLogsForEntity">getAuditLogsForEntity</a></li><li data-type='method'><a href="AuditManager.html#initialize">initialize</a></li><li data-type='method'><a href="AuditManager.html#logAccess">logAccess</a></li><li data-type='method'><a href="AuditManager.html#logChanges">logChanges</a></li><li data-type='method'><a href="AuditManager.html#sanitizeRequestBody">sanitizeRequestBody</a></li><li data-type='method'><a href="AuditManager.html#shouldAuditRequest">shouldAuditRequest</a></li></ul></li><li><a href="CacheManager.html">CacheManager</a><ul class='methods'><li data-type='method'><a href="CacheManager.html#clearNamespace">clearNamespace</a></li><li data-type='method'><a href="CacheManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="CacheManager.html#delete">delete</a></li><li data-type='method'><a href="CacheManager.html#generateKey">generateKey</a></li><li data-type='method'><a href="CacheManager.html#get">get</a></li><li data-type='method'><a href="CacheManager.html#getOrSet">getOrSet</a></li><li data-type='method'><a href="CacheManager.html#set">set</a></li></ul></li><li><a href="EdgeComputingManager.html">EdgeComputingManager</a><ul class='methods'><li data-type='method'><a href="EdgeComputingManager.html#applyChangesFromEdge">applyChangesFromEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#applyCreateChange">applyCreateChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#applyDeleteChange">applyDeleteChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#applyUpdateChange">applyUpdateChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#deployFunctionToEdge">deployFunctionToEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#executeFunctionOnEdge">executeFunctionOnEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#fetchPendingChanges">fetchPendingChanges</a></li><li data-type='method'><a href="EdgeComputingManager.html#getAllEdgeNodesStatus">getAllEdgeNodesStatus</a></li><li data-type='method'><a href="EdgeComputingManager.html#getEdgeNodeStatus">getEdgeNodeStatus</a></li><li data-type='method'><a href="EdgeComputingManager.html#getPendingChangesForNode">getPendingChangesForNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#initialize">initialize</a></li><li data-type='method'><a href="EdgeComputingManager.html#loadEdgeNodes">loadEdgeNodes</a></li><li data-type='method'><a href="EdgeComputingManager.html#markChangeAsProcessed">markChangeAsProcessed</a></li><li data-type='method'><a href="EdgeComputingManager.html#pushChangesToEdge">pushChangesToEdge</a></li><li data-type='method'><a href="EdgeComputingManager.html#registerEdgeNode">registerEdgeNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#signChange">signChange</a></li><li data-type='method'><a href="EdgeComputingManager.html#synchronizeAll">synchronizeAll</a></li><li data-type='method'><a href="EdgeComputingManager.html#synchronizeNode">synchronizeNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#unregisterEdgeNode">unregisterEdgeNode</a></li><li data-type='method'><a href="EdgeComputingManager.html#validateChangeSignature">validateChangeSignature</a></li></ul></li><li><a href="EventManager.html">EventManager</a><ul class='methods'><li data-type='method'><a href="EventManager.html#getEvents">getEvents</a></li><li data-type='method'><a href="EventManager.html#initialize">initialize</a></li><li data-type='method'><a href="EventManager.html#initializeEventStore">initializeEventStore</a></li><li data-type='method'><a href="EventManager.html#initializeMessageQueue">initializeMessageQueue</a></li><li data-type='method'><a href="EventManager.html#publishEvent">publishEvent</a></li><li data-type='method'><a href="EventManager.html#replayEvents">replayEvents</a></li><li data-type='method'><a href="EventManager.html#setupMessageHandlers">setupMessageHandlers</a></li><li data-type='method'><a href="EventManager.html#subscribeToEvent">subscribeToEvent</a></li><li data-type='method'><a href="EventManager.html#unsubscribeFromEvent">unsubscribeFromEvent</a></li></ul></li><li><a href="I18nManager.html">I18nManager</a><ul class='methods'><li data-type='method'><a href="I18nManager.html#changeLanguage">changeLanguage</a></li><li data-type='method'><a href="I18nManager.html#createSampleLocales">createSampleLocales</a></li><li data-type='method'><a href="I18nManager.html#formatCurrency">formatCurrency</a></li><li data-type='method'><a href="I18nManager.html#formatDate">formatDate</a></li><li data-type='method'><a href="I18nManager.html#formatNumber">formatNumber</a></li><li data-type='method'><a href="I18nManager.html#getCurrentLanguage">getCurrentLanguage</a></li><li data-type='method'><a href="I18nManager.html#getMiddleware">getMiddleware</a></li><li data-type='method'><a href="I18nManager.html#getSupportedLanguages">getSupportedLanguages</a></li><li data-type='method'><a href="I18nManager.html#initialize">initialize</a></li><li data-type='method'><a href="I18nManager.html#translate">translate</a></li></ul></li><li><a href="MockDatabase.html">MockDatabase</a></li><li><a href="MockDatabaseClient.html">MockDatabaseClient</a></li><li><a href="MonitoringManager.html">MonitoringManager</a><ul class='methods'><li data-type='method'><a href="MonitoringManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="MonitoringManager.html#getMetricsHandler">getMetricsHandler</a></li><li data-type='method'><a href="MonitoringManager.html#incrementCounter">incrementCounter</a></li><li data-type='method'><a href="MonitoringManager.html#initialize">initialize</a></li><li data-type='method'><a href="MonitoringManager.html#initializeDatadog">initializeDatadog</a></li><li data-type='method'><a href="MonitoringManager.html#initializeNewRelic">initializeNewRelic</a></li><li data-type='method'><a href="MonitoringManager.html#initializePrometheus">initializePrometheus</a></li><li data-type='method'><a href="MonitoringManager.html#initializeProvider">initializeProvider</a></li><li data-type='method'><a href="MonitoringManager.html#recordHistogram">recordHistogram</a></li><li data-type='method'><a href="MonitoringManager.html#recordMetric">recordMetric</a></li><li data-type='method'><a href="MonitoringManager.html#shutdown">shutdown</a></li><li data-type='method'><a href="MonitoringManager.html#startSystemMetricsCollection">startSystemMetricsCollection</a></li><li data-type='method'><a href="MonitoringManager.html#startTimer">startTimer</a></li></ul></li><li><a href="OpenAIService.html">OpenAIService</a><ul class='methods'><li data-type='method'><a href="OpenAIService.html#classifyText">classifyText</a></li><li data-type='method'><a href="OpenAIService.html#generateEmbeddings">generateEmbeddings</a></li><li data-type='method'><a href="OpenAIService.html#generateText">generateText</a></li><li data-type='method'><a href="OpenAIService.html#initialize">initialize</a></li><li data-type='method'><a href="OpenAIService.html#processImage">processImage</a></li></ul></li><li><a href="PluginManager.html">PluginManager</a><ul class='methods'><li data-type='method'><a href="PluginManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="PluginManager.html#executeHooks">executeHooks</a></li><li data-type='method'><a href="PluginManager.html#loadPlugins">loadPlugins</a></li><li data-type='method'><a href="PluginManager.html#register">register</a></li></ul></li><li><a href="PostgresEventStore.html">PostgresEventStore</a><ul class='methods'><li data-type='method'><a href="PostgresEventStore.html#getEvents">getEvents</a></li><li data-type='method'><a href="PostgresEventStore.html#initialize">initialize</a></li><li data-type='method'><a href="PostgresEventStore.html#storeEvent">storeEvent</a></li></ul></li><li><a href="RedisQueue.html">RedisQueue</a><ul class='methods'><li data-type='method'><a href="RedisQueue.html#initialize">initialize</a></li><li data-type='method'><a href="RedisQueue.html#publish">publish</a></li><li data-type='method'><a href="RedisQueue.html#subscribe">subscribe</a></li><li data-type='method'><a href="RedisQueue.html#unsubscribe">unsubscribe</a></li></ul></li><li><a href="SecurityAuditManager.html">SecurityAuditManager</a><ul class='methods'><li data-type='method'><a href="SecurityAuditManager.html#createAuditTables">createAuditTables</a></li><li data-type='method'><a href="SecurityAuditManager.html#createMiddleware">createMiddleware</a></li><li data-type='method'><a href="SecurityAuditManager.html#getSecurityAuditLogs">getSecurityAuditLogs</a></li><li data-type='method'><a href="SecurityAuditManager.html#initialize">initialize</a></li><li data-type='method'><a href="SecurityAuditManager.html#logSecurityEvent">logSecurityEvent</a></li><li data-type='method'><a href="SecurityAuditManager.html#shutdown">shutdown</a></li></ul></li><li><a href="SecurityScanner.html">SecurityScanner</a><ul class='methods'><li data-type='method'><a href="SecurityScanner.html#countIssues">countIssues</a></li><li data-type='method'><a href="SecurityScanner.html#findSourceFiles">findSourceFiles</a></li><li data-type='method'><a href="SecurityScanner.html#generateRecommendations">generateRecommendations</a></li><li data-type='method'><a href="SecurityScanner.html#generateReport">generateReport</a></li><li data-type='method'><a href="SecurityScanner.html#getConfigFiles">getConfigFiles</a></li><li data-type='method'><a href="SecurityScanner.html#getJsFiles">getJsFiles</a></li><li data-type='method'><a href="SecurityScanner.html#getLineNumber">getLineNumber</a></li><li data-type='method'><a href="SecurityScanner.html#initialize">initialize</a></li><li data-type='method'><a href="SecurityScanner.html#runAllScans">runAllScans</a></li><li data-type='method'><a href="SecurityScanner.html#runScan">runScan</a></li><li data-type='method'><a href="SecurityScanner.html#saveReport">saveReport</a></li><li data-type='method'><a href="SecurityScanner.html#scanCode">scanCode</a></li><li data-type='method'><a href="SecurityScanner.html#scanCode">scanCode</a></li><li data-type='method'><a href="SecurityScanner.html#scanConfigurations">scanConfigurations</a></li><li data-type='method'><a href="SecurityScanner.html#scanDependencies">scanDependencies</a></li><li data-type='method'><a href="SecurityScanner.html#scanDependencies">scanDependencies</a></li><li data-type='method'><a href="SecurityScanner.html#scanEndpoints">scanEndpoints</a></li><li data-type='method'><a href="SecurityScanner.html#sendEmailNotification">sendEmailNotification</a></li><li data-type='method'><a href="SecurityScanner.html#sendNotifications">sendNotifications</a></li><li data-type='method'><a href="SecurityScanner.html#sendSlackNotification">sendSlackNotification</a></li><li data-type='method'><a href="SecurityScanner.html#shutdown">shutdown</a></li></ul></li><li></li><li><a href="ServerlessAdapter.html">ServerlessAdapter</a><ul class='methods'><li data-type='method'><a href="ServerlessAdapter.html#createAWSHandler">createAWSHandler</a></li><li data-type='method'><a href="ServerlessAdapter.html#createAzureHandler">createAzureHandler</a></li><li data-type='method'><a href="ServerlessAdapter.html#createGCPHandler">createGCPHandler</a></li><li data-type='method'><a href="ServerlessAdapter.html#initialize">initialize</a></li></ul></li><li><a href="TenantManager.html">TenantManager</a><ul class='methods'><li data-type='method'><a href="TenantManager.html#createTenant">createTenant</a></li><li data-type='method'><a href="TenantManager.html#deleteTenant">deleteTenant</a></li><li data-type='method'><a href="TenantManager.html#getTenant">getTenant</a></li><li data-type='method'><a href="TenantManager.html#getTenantByDomain">getTenantByDomain</a></li><li data-type='method'><a href="TenantManager.html#getTenantDatabaseName">getTenantDatabaseName</a></li><li data-type='method'><a href="TenantManager.html#getTenantSchemaName">getTenantSchemaName</a></li><li data-type='method'><a href="TenantManager.html#initialize">initialize</a></li><li data-type='method'><a href="TenantManager.html#loadTenants">loadTenants</a></li><li data-type='method'><a href="TenantManager.html#tenantMiddleware">tenantMiddleware</a></li><li data-type='method'><a href="TenantManager.html#updateTenant">updateTenant</a></li></ul></li><li><a href="ValidationManager.html">ValidationManager</a><ul class='methods'><li data-type='method'><a href="ValidationManager.html#addSchema">addSchema</a></li><li data-type='method'><a href="ValidationManager.html#createValidationMiddleware">createValidationMiddleware</a></li><li data-type='method'><a href="ValidationManager.html#getSchema">getSchema</a></li><li data-type='method'><a href="ValidationManager.html#getSchemaNames">getSchemaNames</a></li><li data-type='method'><a href="ValidationManager.html#validate">validate</a></li></ul></li><li><a href="WorkflowEngine.html">WorkflowEngine</a><ul class='methods'><li data-type='method'><a href="WorkflowEngine.html#cancelWorkflow">cancelWorkflow</a></li><li data-type='method'><a href="WorkflowEngine.html#completeWorkflow">completeWorkflow</a></li><li data-type='method'><a href="WorkflowEngine.html#evaluateCondition">evaluateCondition</a></li><li data-type='method'><a href="WorkflowEngine.html#executeActions">executeActions</a></li><li data-type='method'><a href="WorkflowEngine.html#executeStateActions">executeStateActions</a></li><li data-type='method'><a href="WorkflowEngine.html#executeTransition">executeTransition</a></li><li data-type='method'><a href="WorkflowEngine.html#getWorkflowInstance">getWorkflowInstance</a></li><li data-type='method'><a href="WorkflowEngine.html#getWorkflowInstancesForEntity">getWorkflowInstancesForEntity</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowCancel">handleWorkflowCancel</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowComplete">handleWorkflowComplete</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowStart">handleWorkflowStart</a></li><li data-type='method'><a href="WorkflowEngine.html#handleWorkflowTransition">handleWorkflowTransition</a></li><li data-type='method'><a href="WorkflowEngine.html#initialize">initialize</a></li><li data-type='method'><a href="WorkflowEngine.html#loadWorkflows">loadWorkflows</a></li><li data-type='method'><a href="WorkflowEngine.html#mapDatabaseInstanceToObject">mapDatabaseInstanceToObject</a></li><li data-type='method'><a href="WorkflowEngine.html#saveWorkflowInstance">saveWorkflowInstance</a></li><li data-type='method'><a href="WorkflowEngine.html#setupEventListeners">setupEventListeners</a></li><li data-type='method'><a href="WorkflowEngine.html#startWorkflow">startWorkflow</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#$randomEmail">$randomEmail</a></li><li><a href="global.html#applyMiddleware">applyMiddleware</a></li><li><a href="global.html#calculatePercentile">calculatePercentile</a></li><li><a href="global.html#closeConnections">closeConnections</a></li><li><a href="global.html#closeDatabaseConnections">closeDatabaseConnections</a></li><li><a href="global.html#connectDatabases">connectDatabases</a></li><li><a href="global.html#connectMockDatabase">connectMockDatabase</a></li><li><a href="global.html#connectMongoDB">connectMongoDB</a></li><li><a href="global.html#connectPostgres">connectPostgres</a></li><li><a href="global.html#connectRedis">connectRedis</a></li><li><a href="global.html#createMigration">createMigration</a></li><li><a href="global.html#createMigrationsTable">createMigrationsTable</a></li><li><a href="global.html#deepMerge">deepMerge</a></li><li><a href="global.html#generateApiClient">generateApiClient</a></li><li><a href="global.html#generateGraphQLComposables">generateGraphQLComposables</a></li><li><a href="global.html#generateGraphQLHooks">generateGraphQLHooks</a></li><li><a href="global.html#generateIndexFile">generateIndexFile</a></li><li><a href="global.html#generateReactSDK">generateReactSDK</a></li><li><a href="global.html#generateRestComposables">generateRestComposables</a></li><li><a href="global.html#generateRestHooks">generateRestHooks</a></li><li><a href="global.html#generateVueSDK">generateVueSDK</a></li><li><a href="global.html#generateWebSocketComposables">generateWebSocketComposables</a></li><li><a href="global.html#generateWebSocketHooks">generateWebSocketHooks</a></li><li><a href="global.html#getAppliedMigrations">getAppliedMigrations</a></li><li><a href="global.html#getDatabaseClient">getDatabaseClient</a></li><li><a href="global.html#hasRoles">hasRoles</a></li><li><a href="global.html#isAuthenticated">isAuthenticated</a></li><li><a href="global.html#isObject">isObject</a></li><li><a href="global.html#loadConfig">loadConfig</a></li><li><a href="global.html#logger">logger</a></li><li><a href="global.html#mergeResolvers">mergeResolvers</a></li><li><a href="global.html#parseConfigValue">parseConfigValue</a></li><li><a href="global.html#recordMigration">recordMigration</a></li><li><a href="global.html#registerGRPCService">registerGRPCService</a></li><li><a href="global.html#registerModelEventHandlers">registerModelEventHandlers</a></li><li><a href="global.html#registerModelRoutes">registerModelRoutes</a></li><li><a href="global.html#runConcurrentTests">runConcurrentTests</a></li><li><a href="global.html#runMigrations">runMigrations</a></li><li><a href="global.html#runPerformanceTests">runPerformanceTests</a></li><li><a href="global.html#runTests">runTests</a></li><li><a href="global.html#selectRandomProduct">selectRandomProduct</a></li><li><a href="global.html#setNestedValue">setNestedValue</a></li><li><a href="global.html#setupApiKeyStrategy">setupApiKeyStrategy</a></li><li><a href="global.html#setupAuthRoutes">setupAuthRoutes</a></li><li><a href="global.html#setupAuthentication">setupAuthentication</a></li><li><a href="global.html#setupGRPC">setupGRPC</a></li><li><a href="global.html#setupGraphQLSchema">setupGraphQLSchema</a></li><li><a href="global.html#setupHealthChecks">setupHealthChecks</a></li><li><a href="global.html#setupJwtStrategy">setupJwtStrategy</a></li><li><a href="global.html#setupMonitoring">setupMonitoring</a></li><li><a href="global.html#setupMySQL">setupMySQL</a></li><li><a href="global.html#setupOAuth2Strategies">setupOAuth2Strategies</a></li><li><a href="global.html#setupRESTApi">setupRESTApi</a></li><li><a href="global.html#setupRateLimiting">setupRateLimiting</a></li><li><a href="global.html#setupWebSockets">setupWebSockets</a></li><li><a href="global.html#simpleTest">simpleTest</a></li><li><a href="global.html#tenantContextMiddleware">tenantContextMiddleware</a></li><li><a href="global.html#testAI">testAI</a></li><li><a href="global.html#testAIServices">testAIServices</a></li><li><a href="global.html#testAsyncFunction">testAsyncFunction</a></li><li><a href="global.html#testAudit">testAudit</a></li><li><a href="global.html#testCache">testCache</a></li><li><a href="global.html#testEdgeComputing">testEdgeComputing</a></li><li><a href="global.html#testEndpoint">testEndpoint</a></li><li><a href="global.html#testEventSystem">testEventSystem</a></li><li><a href="global.html#testEvents">testEvents</a></li><li><a href="global.html#testFeatures">testFeatures</a></li><li><a href="global.html#testI18n">testI18n</a></li><li><a href="global.html#testMultiTenant">testMultiTenant</a></li><li><a href="global.html#testSecurity">testSecurity</a></li><li><a href="global.html#testValidation">testValidation</a></li><li><a href="global.html#testWorkflow">testWorkflow</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+    <section class="package">
+        <h3> </h3>		
+    </section>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <section class="readme usertext">
+        <article><h1>Universal Backend Engine</h1>
+<p>A powerful, flexible backend framework supporting multiple API types, databases, and advanced features.</p>
+<h2>Features</h2>
+<ul>
+<li><strong>Multiple API Types</strong>: REST, GraphQL, WebSocket, and gRPC</li>
+<li><strong>Database Support</strong>: PostgreSQL, MongoDB, Redis, and MySQL</li>
+<li><strong>Authentication</strong>: JWT, OAuth, and API Keys</li>
+<li><strong>Authorization</strong>: Role-based and Permission-based</li>
+<li><strong>Validation</strong>: Schema-based input validation</li>
+<li><strong>Internationalization</strong>: Multi-language support</li>
+<li><strong>Monitoring</strong>: Prometheus metrics and health checks</li>
+<li><strong>Documentation</strong>: Auto-generated API documentation</li>
+<li><strong>SDK Generation</strong>: Client SDKs for multiple platforms</li>
+<li><strong>Serverless</strong>: Deploy as serverless functions</li>
+<li><strong>Multi-tenant</strong>: Support for multi-tenant applications</li>
+<li><strong>Workflow</strong>: Workflow engine for complex business processes</li>
+<li><strong>Audit</strong>: Comprehensive audit logging</li>
+<li><strong>Edge Computing</strong>: Edge function support</li>
+<li><strong>Caching</strong>: Intelligent caching system</li>
+<li><strong>Security</strong>: Built-in security features</li>
+</ul>
+<h2>Documentation</h2>
+<p>Visit our <a href="https://yourusername.github.io/UniversalBackendEngine/">Documentation Website</a> for comprehensive guides and API reference.</p>
+<h2>Getting Started</h2>
+<pre class="prettyprint source lang-bash"><code>npm install universal-backend-engine
+</code></pre>
+<p>Create a configuration file:</p>
+<pre class="prettyprint source lang-javascript"><code>module.exports = {
+  server: {
+    port: 3000,
+    host: 'localhost'
+  },
+  databases: {
+    postgres: {
+      enabled: true,
+      url: 'postgresql://user:password@localhost:5432/mydb'
+    }
+  },
+  apis: {
+    rest: {
+      enabled: true,
+      prefix: '/api'
+    }
+  }
+};
+</code></pre>
+<p>Start your server:</p>
+<pre class="prettyprint source lang-javascript"><code>const { startServer } = require('universal-backend-engine');
+const config = require('./config');
+
+async function main() {
+  const server = await startServer(config);
+  console.log(`Server running at http://${config.server.host}:${config.server.port}`);
+}
+
+main();
+</code></pre>
+<h2>License</h2>
+<p>This project is licensed under the MIT License - see the LICENSE file for details.</p></article>
+    </section>
+
+
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
