@@ -1,19 +1,29 @@
 const request = require('supertest');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 
 // Create a mock Express app
 const app = express();
+
+// Add body parser middleware
+app.use(bodyParser.json());
 
 // Mock JWT secret
 const JWT_SECRET = 'test-secret-key';
 
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+  
+  const token = authHeader.split(' ')[1];
   
   if (!token) {
-    return res.status(401).json({ error: 'No token provided' });
+    return res.status(401).json({ error: 'Invalid token format' });
   }
   
   try {
@@ -47,7 +57,7 @@ app.get('/api/v1/admin', verifyToken, isAdmin, (req, res) => {
 });
 
 // Login route to get a token
-app.post('/api/v1/login', express.json(), (req, res) => {
+app.post('/api/v1/login', (req, res) => {
   const { username, password } = req.body;
   
   // Simple mock authentication
@@ -66,10 +76,18 @@ describe('JWT Authentication', () => {
   let adminToken;
   let userToken;
   
-  beforeAll(async () => {
-    // Create tokens directly instead of using the API
-    adminToken = jwt.sign({ id: 1, username: 'admin', roles: ['admin', 'user'] }, JWT_SECRET, { expiresIn: '1h' });
-    userToken = jwt.sign({ id: 2, username: 'user', roles: ['user'] }, JWT_SECRET, { expiresIn: '1h' });
+  beforeAll(() => {
+    // Create tokens directly
+    adminToken = jwt.sign({ id: 1, username: 'admin', roles: ['admin', 'user'] }, JWT_SECRET);
+    userToken = jwt.sign({ id: 2, username: 'user', roles: ['user'] }, JWT_SECRET);
+  });
+  
+  it('should allow access to public routes without token', async () => {
+    const response = await request(app)
+      .get('/api/v1/public')
+      .expect(200);
+    
+    expect(response.body).toHaveProperty('message', 'Public route');
   });
   
   it('should allow access to protected routes with valid token', async () => {
@@ -92,6 +110,15 @@ describe('JWT Authentication', () => {
       .get('/api/v1/protected')
       .set('Authorization', 'Bearer invalid-token')
       .expect(401);
+  });
+  
+  it('should allow admin access to admin routes', async () => {
+    const response = await request(app)
+      .get('/api/v1/admin')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .expect(200);
+    
+    expect(response.body).toHaveProperty('message', 'Admin route');
   });
   
   it('should deny access to admin routes for non-admin users', async () => {
