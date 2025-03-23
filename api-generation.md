@@ -1,255 +1,346 @@
 # API Generation
 
-Universal Backend Engine can dynamically generate multiple API types from your data models.
+Universal Backend Engine supports multiple API types, allowing you to expose your services through different protocols based on your application needs.
 
 ## Supported API Types
 
-- **REST API**: RESTful endpoints with Swagger documentation
-- **GraphQL API**: GraphQL schema with resolvers
-- **WebSocket API**: Real-time communication
-- **gRPC API**: High-performance RPC framework
+- **REST API**: Traditional HTTP-based API with JSON responses
+- **GraphQL**: Query language for your API with a single endpoint
+- **WebSocket**: Real-time bidirectional communication
+- **gRPC**: High-performance RPC framework
 
-## REST API
+## Configuration
 
-### Configuration
+Configure your APIs in the configuration file:
 
 ```javascript
 {
-  "api": {
+  "apis": {
     "rest": {
       "enabled": true,
-      "basePath": "/api",
+      "prefix": "/api",
       "version": "v1",
       "documentation": true
+    },
+    "graphql": {
+      "enabled": true,
+      "path": "/graphql",
+      "playground": true,
+      "introspection": true
+    },
+    "websocket": {
+      "enabled": true,
+      "path": "/ws"
+    },
+    "grpc": {
+      "enabled": false,
+      "port": 50051,
+      "protoDir": "./proto"
     }
   }
 }
 ```
 
-### Automatic Route Generation
+## REST API
 
-The engine automatically generates REST endpoints for your models:
+### Creating REST Endpoints
 
-- `GET /{model}` - List all resources
-- `GET /{model}/:id` - Get a specific resource
-- `POST /{model}` - Create a new resource
-- `PUT /{model}/:id` - Update a resource
-- `DELETE /{model}/:id` - Delete a resource
-
-### Custom Routes
-
-You can define custom routes in your model:
+Define your REST endpoints using the route definition system:
 
 ```javascript
-// Example model with custom routes
-module.exports = {
-  name: 'User',
-  // Standard CRUD routes
-  routes: {
-    getAll: async (req, res) => { /* ... */ },
-    getById: async (req, res) => { /* ... */ },
-    create: async (req, res) => { /* ... */ },
-    update: async (req, res) => { /* ... */ },
-    delete: async (req, res) => { /* ... */ },
-    // Custom routes
-    custom: [
-      {
-        method: 'GET',
-        path: '/search',
-        handler: async (req, res) => { /* ... */ }
-      }
-    ]
+// src/routes/users.js
+const { router } = require('universal-backend-engine');
+
+// Get all users
+router.get('/users', async (req, res) => {
+  const users = await req.db.postgres.query('SELECT * FROM users');
+  res.json(users.rows);
+});
+
+// Get user by ID
+router.get('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const result = await req.db.postgres.query('SELECT * FROM users WHERE id = $1', [id]);
+  
+  if (result.rows.length === 0) {
+    return res.status(404).json({ error: 'User not found' });
   }
-};
-```
+  
+  res.json(result.rows[0]);
+});
 
-### Middleware Support
-
-You can apply middleware to specific routes:
-
-```javascript
-module.exports = {
-  name: 'User',
-  routes: { /* ... */ },
-  middlewares: {
-    all: [authMiddleware],
-    getAll: [paginationMiddleware],
-    create: [validationMiddleware]
+// Create a new user
+router.post('/users', async (req, res) => {
+  const { username, email, password } = req.body;
+  
+  // Validate input
+  if (!username || !email || !password) {
+    return res.status(400).json({ error: 'Missing required fields' });
   }
-};
+  
+  // Insert user
+  const result = await req.db.postgres.query(
+    'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+    [username, email, password]
+  );
+  
+  res.status(201).json(result.rows[0]);
+});
+
+module.exports = router;
 ```
 
 ### API Documentation
 
-When enabled, Swagger documentation is automatically generated and available at:
-
-```
-/api/v1/docs
-```
+REST APIs automatically generate OpenAPI/Swagger documentation, accessible at `/api/docs`.
 
 ## GraphQL API
 
-### Configuration
+### Defining GraphQL Schema
+
+Define your GraphQL schema and resolvers:
 
 ```javascript
-{
-  "api": {
-    "graphql": {
-      "enabled": true,
-      "introspection": true,
-      "playground": true
-    }
+// src/graphql/schema.js
+const { gql } = require('universal-backend-engine');
+
+const typeDefs = gql`
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+    createdAt: String!
   }
-}
-```
+  
+  type Query {
+    users: [User]
+    user(id: ID!): User
+  }
+  
+  type Mutation {
+    createUser(username: String!, email: String!, password: String!): User
+  }
+`;
 
-### Schema Generation
-
-The engine generates GraphQL schema from your models:
-
-```javascript
-// Example model with GraphQL schema
-module.exports = {
-  name: 'User',
-  graphql: {
-    typeDefs: `
-      type User {
-        id: ID!
-        name: String!
-        email: String!
-        createdAt: String
-      }
-      
-      extend type Query {
-        users: [User]
-        user(id: ID!): User
-      }
-      
-      extend type Mutation {
-        createUser(name: String!, email: String!): User
-        updateUser(id: ID!, name: String, email: String): User
-        deleteUser(id: ID!): Boolean
-      }
-    `,
-    resolvers: {
-      Query: {
-        users: async () => { /* ... */ },
-        user: async (_, { id }) => { /* ... */ }
-      },
-      Mutation: {
-        createUser: async (_, { name, email }) => { /* ... */ },
-        updateUser: async (_, { id, ...data }) => { /* ... */ },
-        deleteUser: async (_, { id }) => { /* ... */ }
-      }
+const resolvers = {
+  Query: {
+    users: async (_, __, { db }) => {
+      const result = await db.postgres.query('SELECT * FROM users');
+      return result.rows;
+    },
+    user: async (_, { id }, { db }) => {
+      const result = await db.postgres.query('SELECT * FROM users WHERE id = $1', [id]);
+      return result.rows[0] || null;
+    }
+  },
+  Mutation: {
+    createUser: async (_, { username, email, password }, { db }) => {
+      const result = await db.postgres.query(
+        'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+        [username, email, password]
+      );
+      return result.rows[0];
     }
   }
 };
+
+module.exports = { typeDefs, resolvers };
 ```
+
+### GraphQL Playground
+
+When enabled, the GraphQL Playground is available at `/graphql`.
 
 ## WebSocket API
 
-### Configuration
+### Creating WebSocket Handlers
+
+Define WebSocket event handlers:
 
 ```javascript
-{
-  "api": {
-    "websocket": {
-      "enabled": true,
-      "path": "/ws"
-    }
-  }
-}
-```
+// src/websocket/handlers.js
+const { websocket } = require('universal-backend-engine');
 
-### Event Handling
+// Handle connection
+websocket.on('connection', (socket) => {
+  console.log('Client connected:', socket.id);
+  
+  // Handle chat messages
+  socket.on('chat:message', async (data) => {
+    // Save message to database
+    await socket.db.postgres.query(
+      'INSERT INTO messages (user_id, content) VALUES ($1, $2)',
+      [data.userId, data.content]
+    );
+    
+    // Broadcast to all clients
+    websocket.emit('chat:message', {
+      userId: data.userId,
+      username: data.username,
+      content: data.content,
+      timestamp: new Date().toISOString()
+    });
+  });
+  
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
 
-```javascript
-// Example WebSocket event handlers
-module.exports = {
-  name: 'Chat',
-  websocket: {
-    events: {
-      'message:send': async (socket, data) => {
-        // Process message
-        const message = await saveMessage(data);
-        
-        // Broadcast to room
-        socket.to(data.roomId).emit('message:received', message);
-      },
-      'room:join': (socket, { roomId }) => {
-        socket.join(roomId);
-        socket.emit('room:joined', { roomId });
-      }
-    }
-  }
-};
+module.exports = websocket;
 ```
 
 ## gRPC API
 
-### Configuration
+### Defining gRPC Services
 
-```javascript
-{
-  "api": {
-    "grpc": {
-      "enabled": true,
-      "port": 50051
-    }
-  }
-}
-```
-
-### Proto File Definition
-
-Create proto files in the `src/protos` directory:
+Define your gRPC services using Protocol Buffers:
 
 ```protobuf
-// Example user.proto
+// proto/user_service.proto
 syntax = "proto3";
 
-package user;
+package userservice;
 
 service UserService {
   rpc GetUser (GetUserRequest) returns (User);
   rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
   rpc CreateUser (CreateUserRequest) returns (User);
-  rpc UpdateUser (UpdateUserRequest) returns (User);
-  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
 }
 
 message GetUserRequest {
   string id = 1;
 }
 
-message User {
-  string id = 1;
-  string name = 2;
-  string email = 3;
+message ListUsersRequest {
+  int32 limit = 1;
+  int32 offset = 2;
 }
 
-// Additional message definitions...
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string created_at = 4;
+}
 ```
 
-### Service Implementation
+### Implementing gRPC Services
+
+Implement the service handlers:
 
 ```javascript
-// Example gRPC service implementation
-module.exports = {
-  name: 'User',
-  grpc: {
-    protoFile: 'user.proto',
-    implementation: {
-      GetUser: async (call, callback) => {
-        try {
-          const user = await getUserById(call.request.id);
-          callback(null, user);
-        } catch (error) {
-          callback(error);
-        }
-      },
-      // Other method implementations...
+// src/grpc/user_service.js
+const { db } = require('universal-backend-engine');
+
+const userService = {
+  getUser: async (call, callback) => {
+    try {
+      const { id } = call.request;
+      const result = await db.postgres.query('SELECT * FROM users WHERE id = $1', [id]);
+      
+      if (result.rows.length === 0) {
+        return callback(new Error('User not found'));
+      }
+      
+      callback(null, {
+        id: result.rows[0].id,
+        username: result.rows[0].username,
+        email: result.rows[0].email,
+        created_at: result.rows[0].created_at.toISOString()
+      });
+    } catch (error) {
+      callback(error);
+    }
+  },
+  
+  listUsers: async (call, callback) => {
+    try {
+      const { limit = 10, offset = 0 } = call.request;
+      
+      const result = await db.postgres.query(
+        'SELECT * FROM users LIMIT $1 OFFSET $2',
+        [limit, offset]
+      );
+      
+      const countResult = await db.postgres.query('SELECT COUNT(*) FROM users');
+      
+      callback(null, {
+        users: result.rows.map(user => ({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          created_at: user.created_at.toISOString()
+        })),
+        total: parseInt(countResult.rows[0].count)
+      });
+    } catch (error) {
+      callback(error);
+    }
+  },
+  
+  createUser: async (call, callback) => {
+    try {
+      const { username, email, password } = call.request;
+      
+      const result = await db.postgres.query(
+        'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+        [username, email, password]
+      );
+      
+      callback(null, {
+        id: result.rows[0].id,
+        username: result.rows[0].username,
+        email: result.rows[0].email,
+        created_at: result.rows[0].created_at.toISOString()
+      });
+    } catch (error) {
+      callback(error);
     }
   }
 };
+
+module.exports = userService;
 ```
+
+## API Versioning
+
+Universal Backend Engine supports API versioning to maintain backward compatibility:
+
+```javascript
+// For REST APIs
+router.get('/v1/users', handlersV1.getUsers);
+router.get('/v2/users', handlersV2.getUsers);
+
+// For GraphQL, you can use schema stitching
+const schemaV1 = makeExecutableSchema({ typeDefs: typeDefsV1, resolvers: resolversV1 });
+const schemaV2 = makeExecutableSchema({ typeDefs: typeDefsV2, resolvers: resolversV2 });
+
+// For WebSocket, you can namespace events
+socket.on('v1:chat:message', handlersV1.chatMessage);
+socket.on('v2:chat:message', handlersV2.chatMessage);
+```
+
+## API Security
+
+All APIs support various security mechanisms:
+
+- Authentication (JWT, OAuth, API Keys)
+- Authorization (Role-based, Permission-based)
+- Rate limiting
+- CORS configuration
+- Input validation
+
+See the [Security Configuration](security.md) documentation for more details.
