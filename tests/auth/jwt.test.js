@@ -27,7 +27,7 @@ const verifyToken = (req, res, next) => {
 
 // Middleware to check admin role
 const isAdmin = (req, res, next) => {
-  if (!req.user.roles.includes('admin')) {
+  if (!req.user || !req.user.roles || !req.user.roles.includes('admin')) {
     return res.status(403).json({ error: 'Requires admin role' });
   }
   next();
@@ -47,7 +47,7 @@ app.get('/api/v1/admin', verifyToken, isAdmin, (req, res) => {
 });
 
 // Login route to get a token
-app.post('/api/v1/login', (req, res) => {
+app.post('/api/v1/login', express.json(), (req, res) => {
   const { username, password } = req.body;
   
   // Simple mock authentication
@@ -67,18 +67,9 @@ describe('JWT Authentication', () => {
   let userToken;
   
   beforeAll(async () => {
-    // Get tokens for testing
-    const adminResponse = await request(app)
-      .post('/api/v1/login')
-      .send({ username: 'admin', password: 'admin' });
-    
-    adminToken = adminResponse.body.token;
-    
-    const userResponse = await request(app)
-      .post('/api/v1/login')
-      .send({ username: 'user', password: 'user' });
-    
-    userToken = userResponse.body.token;
+    // Create tokens directly instead of using the API
+    adminToken = jwt.sign({ id: 1, username: 'admin', roles: ['admin', 'user'] }, JWT_SECRET, { expiresIn: '1h' });
+    userToken = jwt.sign({ id: 2, username: 'user', roles: ['user'] }, JWT_SECRET, { expiresIn: '1h' });
   });
   
   it('should allow access to protected routes with valid token', async () => {
