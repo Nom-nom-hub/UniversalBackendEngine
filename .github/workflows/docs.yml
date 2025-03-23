@@ -1,0 +1,48 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'src/**/*.js'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate API documentation
+        run: npm run docs
+
+      - name: Convert Markdown to HTML
+        run: |
+          npm install -g markdown-to-html-cli
+          mkdir -p docs/html
+          for file in docs/*.md; do
+            if [ -f "$file" ]; then
+              filename=$(basename -- "$file")
+              name="${filename%.*}"
+              markdown-to-html-cli --source "$file" --output "docs/${name}.html" --title "Universal Backend Engine - ${name}"
+            fi
+          done
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
+          branch: gh-pages
+          clean: true 

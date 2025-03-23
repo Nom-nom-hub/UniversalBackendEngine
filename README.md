@@ -21,28 +21,52 @@ A powerful, flexible backend framework supporting multiple API types, databases,
 - **Caching**: Intelligent caching system
 - **Security**: Built-in security features
 
-## Getting Started
-
-See the [Getting Started](docs/getting-started.md) guide for installation and basic usage.
-
 ## Documentation
 
-- [Configuration](docs/configuration.md)
-- [Database Integration](docs/database-integration.md)
-- [API Generation](docs/api-generation.md)
-- [SDK Generation](docs/sdk-generation.md)
-- [Authentication](docs/authentication.md)
-- [Authorization](docs/authorization.md)
-- [Validation](docs/validation.md)
-- [Internationalization](docs/internationalization.md)
-- [Monitoring](docs/monitoring.md)
-- [Serverless](docs/serverless.md)
-- [Multi-tenant](docs/multi-tenant.md)
-- [Workflow](docs/workflow.md)
-- [Audit](docs/audit.md)
-- [Edge Computing](docs/edge-computing.md)
-- [Caching](docs/caching.md)
-- [Security](docs/security.md)
+Visit our [Documentation Website](https://yourusername.github.io/UniversalBackendEngine/) for comprehensive guides and API reference.
+
+## Getting Started
+
+```bash
+npm install universal-backend-engine
+```
+
+Create a configuration file:
+
+```javascript
+module.exports = {
+  server: {
+    port: 3000,
+    host: 'localhost'
+  },
+  databases: {
+    postgres: {
+      enabled: true,
+      url: 'postgresql://user:password@localhost:5432/mydb'
+    }
+  },
+  apis: {
+    rest: {
+      enabled: true,
+      prefix: '/api'
+    }
+  }
+};
+```
+
+Start your server:
+
+```javascript
+const { startServer } = require('universal-backend-engine');
+const config = require('./config');
+
+async function main() {
+  const server = await startServer(config);
+  console.log(`Server running at http://${config.server.host}:${config.server.port}`);
+}
+
+main();
+```
 
 ## License
 
