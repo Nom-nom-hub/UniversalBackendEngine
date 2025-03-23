@@ -1,84 +1,48 @@
 # Universal Backend Engine
 
-A modular, adaptive backend that dynamically generates APIs (REST, GraphQL, WebSockets, gRPC) and works seamlessly with various front-end frameworks.
+A powerful, flexible backend framework supporting multiple API types, databases, and advanced features.
 
 ## Features
 
-- **Dynamic API Generation**: Automatically generates REST, GraphQL, WebSockets, and gRPC endpoints based on configurations.
-- **Adaptive Database Layer**: Supports PostgreSQL, MySQL, and MongoDB, with automatic query optimization.
-- **Authentication & Security**: JWT-based authentication, with support for OAuth2 & API Keys.
-- **Front-End Adaptability**: Generates SDKs for React, Next.js, Flutter, Unity, and Vue.js.
-- **Scalability & Deployment**: Containerized with Docker & Kubernetes for cloud-native deployment.
+- **Multiple API Types**: REST, GraphQL, WebSocket, and gRPC
+- **Database Support**: PostgreSQL, MongoDB, Redis, and MySQL
+- **Authentication**: JWT, OAuth, and API Keys
+- **Authorization**: Role-based and Permission-based
+- **Validation**: Schema-based input validation
+- **Internationalization**: Multi-language support
+- **Monitoring**: Prometheus metrics and health checks
+- **Documentation**: Auto-generated API documentation
+- **SDK Generation**: Client SDKs for multiple platforms
+- **Serverless**: Deploy as serverless functions
+- **Multi-tenant**: Support for multi-tenant applications
+- **Workflow**: Workflow engine for complex business processes
+- **Audit**: Comprehensive audit logging
+- **Edge Computing**: Edge function support
+- **Caching**: Intelligent caching system
+- **Security**: Built-in security features
 
 ## Getting Started
 
-### Prerequisites
+See the [Getting Started](docs/getting-started.md) guide for installation and basic usage.
 
-- Node.js 16+
-- PostgreSQL, MySQL, or MongoDB
-- Redis (optional, for caching)
+## Documentation
 
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/universal-backend-engine.git
-   cd universal-backend-engine
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file in the root directory:
-   ```
-   PORT=3000
-   NODE_ENV=development
-   JWT_SECRET=your-secret-key
-   POSTGRES_HOST=localhost
-   POSTGRES_PORT=5432
-   POSTGRES_USER=postgres
-   POSTGRES_PASSWORD=postgres
-   POSTGRES_DB=universal_backend
-   ```
-
-4. Start the server:
-   ```bash
-   npm run dev
-   ```
-
-### Docker Deployment
-
-1. Build and run using Docker Compose:
-   ```bash
-   cd docker
-   docker-compose up -d
-   ```
-
-### Kubernetes Deployment
-
-1. Apply the Kubernetes configuration:
-   ```bash
-   kubectl apply -f kubernetes/deployment.yaml
-   ```
-
-## Configuration
-
-The Universal Backend Engine is highly configurable. You can customize it by:
-
-1. Modifying the `.env` file for environment-specific settings.
-2. Creating a `config.json` file in the root directory for more detailed configuration.
-3. Using environment variables with the `UBE_` prefix to override specific settings.
-
-## API Documentation
-
-- REST API documentation is available at `/api/v1/docs` when the server is running.
-- GraphQL playground is available at `/graphql` in development mode.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+- [Configuration](docs/configuration.md)
+- [Database Integration](docs/database-integration.md)
+- [API Generation](docs/api-generation.md)
+- [SDK Generation](docs/sdk-generation.md)
+- [Authentication](docs/authentication.md)
+- [Authorization](docs/authorization.md)
+- [Validation](docs/validation.md)
+- [Internationalization](docs/internationalization.md)
+- [Monitoring](docs/monitoring.md)
+- [Serverless](docs/serverless.md)
+- [Multi-tenant](docs/multi-tenant.md)
+- [Workflow](docs/workflow.md)
+- [Audit](docs/audit.md)
+- [Edge Computing](docs/edge-computing.md)
+- [Caching](docs/caching.md)
+- [Security](docs/security.md)
 
 ## License
 

@@ -1,6 +1,6 @@
 # Getting Started with Universal Backend Engine
 
-This guide will help you set up and start using the Universal Backend Engine.
+This guide will help you get started with Universal Backend Engine, a powerful and flexible backend framework.
 
 ## Prerequisites
 
@@ -17,28 +17,94 @@ Before you begin, ensure you have the following installed:
 npm install universal-backend-engine
 ```
 
-## Basic Setup
+## Basic Usage
 
-Create a new file called `index.js` with the following content:
+### 1. Create a Configuration File
+
+Create a `config.js` file in your project:
 
 ```javascript
-const { createServer } = require('universal-backend-engine');
-
-// Create a new server instance
-const server = createServer({
-  port: 3000,
+module.exports = {
+  server: {
+    port: 3000,
+    host: 'localhost'
+  },
   databases: {
     postgres: {
-      url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/mydb'
+      enabled: true,
+      url: 'postgresql://user:password@localhost:5432/mydb'
     }
   },
-  apis: ['rest', 'graphql']
+  apis: {
+    rest: {
+      enabled: true,
+      prefix: '/api'
+    },
+    graphql: {
+      enabled: true
+    }
+  },
+  auth: {
+    jwt: {
+      secret: process.env.JWT_SECRET || 'your-secret-key',
+      expiresIn: '1d'
+    }
+  }
+};
+```
+
+### 2. Create Your Main File
+
+Create an `index.js` file:
+
+```javascript
+const { startServer } = require('universal-backend-engine');
+const config = require('./config');
+
+async function main() {
+  try {
+    const server = await startServer(config);
+    console.log(`Server running at http://${config.server.host}:${config.server.port}`);
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+main();
+```
+
+### 3. Define Your Routes
+
+Create a `routes` directory and add your route files:
+
+```javascript
+// routes/users.js
+const { router } = require('universal-backend-engine');
+
+router.get('/users', async (req, res) => {
+  const users = await req.db.postgres.query('SELECT * FROM users');
+  res.json(users.rows);
 });
 
-// Start the server
-server.start().then(() => {
-  console.log('Server started on port 3000');
+router.get('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const result = await req.db.postgres.query('SELECT * FROM users WHERE id = $1', [id]);
+  
+  if (result.rows.length === 0) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  
+  res.json(result.rows[0]);
 });
+
+module.exports = router;
+```
+
+### 4. Start the Server
+
+```bash
+node index.js
 ```
 
 ## Configuration
@@ -47,6 +113,7 @@ See the [Configuration](configuration.md) page for detailed configuration option
 
 ## Next Steps
 
-- Learn about [API Generation](api-generation.md)
+- Learn about [Configuration](configuration.md)
 - Explore [Database Integration](database-integration.md)
-- Discover [Advanced Features](advanced-features.md)
+- Understand [API Generation](api-generation.md)
+- Discover [SDK Generation](sdk-generation.md)
