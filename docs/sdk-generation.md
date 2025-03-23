@@ -1,157 +1,181 @@
 # SDK Generation
 
-Universal Backend Engine can automatically generate client SDKs for various frontend frameworks, making it easier to integrate your backend with different frontend applications.
+Universal Backend Engine can automatically generate client SDKs for your APIs, making it easier for frontend developers to interact with your backend services.
 
-## Supported Frameworks
+## Supported SDK Types
 
-- React
-- Next.js
-- Vue.js
-- Flutter
-- Unity
+- **JavaScript/TypeScript**: For web applications
+- **React**: Hooks and components for React applications
+- **Vue.js**: Composables and components for Vue applications
+- **Flutter**: Dart code for mobile applications
+- **Swift**: For iOS applications
+- **Kotlin**: For Android applications
 
 ## Configuration
 
-Enable SDK generation in your configuration:
+Configure SDK generation in your configuration file:
 
 ```javascript
 {
   "sdkGeneration": {
     "enabled": true,
-    "targets": ["react", "nextjs", "flutter", "unity", "vue"]
+    "output": "./sdk",
+    "targets": ["javascript", "react", "vue", "flutter"],
+    "options": {
+      "typescript": true,
+      "includeTests": true,
+      "bundler": "webpack"
+    }
   }
 }
 ```
 
 ## Generating SDKs
 
-### Command Line
-
-Generate SDKs using the provided script:
+To generate SDKs for your APIs, run:
 
 ```bash
 npm run generate-sdk
 ```
 
-This will create SDK files in the `sdk/` directory for each target framework specified in your configuration.
+This will create SDK files in the specified output directory for each target platform.
 
-### Programmatic Generation
+## JavaScript/TypeScript SDK Example
 
-You can also generate SDKs programmatically:
-
-```javascript
-const { generateReactSDK } = require('./core/sdk-generators/react');
-const { generateVueSDK } = require('./core/sdk-generators/vue');
-
-// Generate React SDK
-await generateReactSDK(config, './sdk/react');
-
-// Generate Vue SDK
-await generateVueSDK(config, './sdk/vue');
-```
-
-## SDK Structure
-
-Each generated SDK includes:
-
-- API client for making HTTP requests
-- Hooks/composables for data fetching and mutations
-- Authentication utilities
-- WebSocket integration (if enabled)
-- GraphQL integration (if enabled)
-
-### React SDK Example
+The generated JavaScript/TypeScript SDK provides typed API clients:
 
 ```javascript
-// Using the React SDK
-import { useFetch, useCreate, useAuth } from 'universal-backend-sdk';
+// Example of using the generated SDK
+import { UserApi, ProductApi } from 'my-backend-sdk';
 
-// Authentication
-const { login, logout, isAuthenticated, user } = useAuth();
+// Initialize the API with configuration
+const userApi = new UserApi({
+  baseUrl: 'https://api.example.com',
+  apiKey: 'your-api-key'
+});
 
-// Fetch data
-const { data, loading, error, refetch } = useFetch('/users');
-
-// Create data
-const { create, loading: createLoading, error: createError } = useCreate('/users');
-
-// Usage
-const handleSubmit = async (userData) => {
-  await create(userData);
-  refetch();
-};
-```
-
-### Vue.js SDK Example
-
-```javascript
-// Using the Vue.js SDK
-import { useFetch, useCreate, useAuth } from 'universal-backend-sdk';
-
-export default {
-  setup() {
-    // Authentication
-    const { login, logout, isAuthenticated, user } = useAuth();
-    
-    // Fetch data
-    const { data, loading, error, refetch } = useFetch('/users');
-    
-    // Create data
-    const { create, loading: createLoading, error: createError } = useCreate('/users');
-    
-    // Methods
-    const handleSubmit = async (userData) => {
-      await create(userData);
-      refetch();
-    };
-    
-    return {
-      data,
-      loading,
-      error,
-      handleSubmit,
-      isAuthenticated,
-      user,
-      login,
-      logout
-    };
+// Use the API
+async function getUsers() {
+  try {
+    const users = await userApi.getUsers();
+    console.log(users);
+  } catch (error) {
+    console.error('Failed to fetch users:', error);
   }
-};
+}
+```
+
+## React SDK Example
+
+The React SDK includes hooks for easy API integration:
+
+```jsx
+import { useUsers, useProducts } from 'my-backend-sdk/react';
+
+function UserList() {
+  const { data: users, isLoading, error } = useUsers();
+  
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## Vue.js SDK Example
+
+The Vue SDK includes composables for Vue 3:
+
+```vue
+<template>
+  <div>
+    <div v-if="isLoading">Loading...</div>
+    <div v-else-if="error">Error: {{ error.message }}</div>
+    <ul v-else>
+      <li v-for="product in products" :key="product.id">
+        {{ product.name }} - ${{ product.price }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup>
+import { useProducts } from 'my-backend-sdk/vue';
+
+const { products, isLoading, error } = useProducts();
+</script>
+```
+
+## Flutter SDK Example
+
+The Flutter SDK provides Dart classes and methods:
+
+```dart
+import 'package:my_backend_sdk/my_backend_sdk.dart';
+
+class UserListScreen extends StatefulWidget {
+  @override
+  _UserListScreenState createState() => _UserListScreenState();
+}
+
+class _UserListScreenState extends State<UserListScreen> {
+  final UserApi userApi = UserApi();
+  List<User> users = [];
+  bool isLoading = true;
+  
+  @override
+  void initState() {
+    super.initState();
+    fetchUsers();
+  }
+  
+  Future<void> fetchUsers() async {
+    try {
+      final fetchedUsers = await userApi.getUsers();
+      setState(() {
+        users = fetchedUsers;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error fetching users: $e');
+    }
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    // Widget implementation
+  }
+}
 ```
 
 ## Customizing SDK Generation
 
-You can customize the SDK generation by modifying the generator files in `src/core/sdk-generators/`.
-
-For example, to add custom functionality to the React SDK:
+You can customize the SDK generation process by providing templates and plugins:
 
 ```javascript
-// src/core/sdk-generators/react.js
-function generateApiClient(config) {
-  return `
-import axios from 'axios';
-
-class ApiClient {
-  // ... existing code
-  
-  // Add custom methods
-  async uploadFile(file, path) {
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    return this.post(\`\${path}/upload\`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+{
+  "sdkGeneration": {
+    "templates": {
+      "react": "./sdk-templates/react",
+      "vue": "./sdk-templates/vue"
+    },
+    "plugins": [
+      "./sdk-plugins/add-authentication.js",
+      "./sdk-plugins/add-logging.js"
+    ]
   }
-}
-
-export default ApiClient;
-  `;
 }
 ```
 
-## SDK Usage Documentation
+## SDK Versioning
 
-When SDKs are generated, documentation is also created in the `sdk/{framework}/README.md` file, explaining how to use the SDK with examples.
+The generated SDKs include version information that matches your API version, making it easier to manage compatibility between frontend and backend.

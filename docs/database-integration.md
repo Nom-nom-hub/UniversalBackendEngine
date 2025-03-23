@@ -1,218 +1,120 @@
 # Database Integration
 
-Universal Backend Engine supports multiple database systems and provides an adaptive layer for seamless integration.
+Universal Backend Engine supports multiple database types out of the box, making it easy to work with different data storage solutions based on your project requirements.
 
 ## Supported Databases
 
-- PostgreSQL
-- MySQL
-- MongoDB
+- **PostgreSQL**: A powerful, open-source object-relational database system
+- **MongoDB**: A document-oriented NoSQL database
+- **Redis**: An in-memory data structure store, used as a database, cache, and message broker
+- **MySQL**: A popular open-source relational database
 
 ## Configuration
 
-Configure your database connections in the configuration:
+You can configure database connections in your configuration file:
 
 ```javascript
 {
-  "database": {
-    "default": "postgres",
+  "databases": {
     "postgres": {
-      "host": "localhost",
-      "port": 5432,
-      "user": "postgres",
-      "password": "postgres",
-      "database": "universal_backend"
+      "enabled": true,
+      "url": "postgresql://user:password@localhost:5432/mydb",
+      "poolSize": 10
     },
     "mongodb": {
-      "uri": "mongodb://localhost:27017/universal_backend"
+      "enabled": true,
+      "url": "mongodb://localhost:27017/mydb"
+    },
+    "redis": {
+      "enabled": true,
+      "url": "redis://localhost:6379"
     },
     "mysql": {
-      "host": "localhost",
-      "port": 3306,
-      "user": "root",
-      "password": "password",
-      "database": "universal_backend"
+      "enabled": false,
+      "url": "mysql://user:password@localhost:3306/mydb"
     }
   }
 }
 ```
 
-## Database Connection
+## Using Databases in Your Application
 
-The engine automatically connects to configured databases on startup:
+### PostgreSQL Example
 
 ```javascript
-// src/core/database/index.js
-async function connectDatabases(config) {
-  const { default: defaultDb, ...databases } = config.database;
-  
-  // Connect to each configured database
-  for (const [name, dbConfig] of Object.entries(databases)) {
-    if (typeof dbConfig === 'object') {
-      await connectToDatabase(name, dbConfig);
-    }
-  }
+const { db } = require('universal-backend-engine');
+
+async function getUserById(id) {
+  const result = await db.postgres.query(
+    'SELECT * FROM users WHERE id = $1',
+    [id]
+  );
+  return result.rows[0];
 }
 ```
 
-## Models
-
-Define your data models to work with the database:
+### MongoDB Example
 
 ```javascript
-// src/models/user.js
-module.exports = {
-  name: 'User',
-  fields: ['id', 'name', 'email', 'password', 'createdAt', 'updatedAt'],
-  database: 'postgres', // Specify which database to use
-  schema: {
-    id: { type: 'uuid', primaryKey: true, defaultValue: 'uuid_generate_v4()' },
-    name: { type: 'string', required: true },
-    email: { type: 'string', required: true, unique: true },
-    password: { type: 'string', required: true },
-    createdAt: { type: 'timestamp', defaultValue: 'CURRENT_TIMESTAMP' },
-    updatedAt: { type: 'timestamp', defaultValue: 'CURRENT_TIMESTAMP' }
-  },
-  // GraphQL schema definition
-  graphql: {
-    typeDefs: `
-      type User {
-        id: ID!
-        name: String!
-        email: String!
-        createdAt: String!
-        updatedAt: String!
-      }
-      
-      input UserInput {
-        name: String!
-        email: String!
-        password: String!
-      }
-      
-      extend type Query {
-        users: [User!]!
-        user(id: ID!): User
-      }
-      
-      extend type Mutation {
-        createUser(input: UserInput!): User!
-        updateUser(id: ID!, input: UserInput!): User!
-        deleteUser(id: ID!): Boolean!
-      }
-    `,
-    resolvers: {
-      // Resolver implementations
-    }
-  }
+const { db } = require('universal-backend-engine');
+
+async function createProduct(product) {
+  const collection = db.mongodb.collection('products');
+  const result = await collection.insertOne(product);
+  return result.insertedId;
 }
 ```
 
-## Query Builder
-
-The engine provides a unified query builder interface for different database types:
+### Redis Example
 
 ```javascript
-// Example of using the query builder
-const { createQueryBuilder } = require('../core/database/query-builder');
+const { db } = require('universal-backend-engine');
 
-async function getUsersByRole(role) {
-  const qb = createQueryBuilder('users');
-  
-  return qb
-    .select(['id', 'name', 'email'])
-    .where('role', '=', role)
-    .orderBy('name', 'ASC')
-    .limit(10)
-    .execute();
+async function cacheUserData(userId, userData) {
+  await db.redis.set(`user:${userId}`, JSON.stringify(userData), 'EX', 3600);
+}
+
+async function getCachedUserData(userId) {
+  const data = await db.redis.get(`user:${userId}`);
+  return data ? JSON.parse(data) : null;
 }
 ```
 
 ## Migrations
 
-Database migrations are supported for schema changes:
-
-```javascript
-// migrations/20230101000000_create_users_table.js
-module.exports = {
-  database: 'postgres',
-  up: async (client) => {
-    await client.query(`
-      CREATE TABLE users (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-  },
-  down: async (client) => {
-    await client.query('DROP TABLE users');
-  }
-};
-```
-
-Run migrations using the CLI:
+Universal Backend Engine includes a built-in migration system to help you manage database schema changes:
 
 ```bash
+# Create a new migration
+npm run create-migration -- "add_users_table"
+
+# Run migrations
 npm run migrate
 ```
 
-## Multi-Tenancy
+## Multi-Database Transactions
 
-The engine supports multi-tenant database configurations:
-
-- Separate databases per tenant
-- Separate schemas per tenant
-- Shared database with tenant ID column
-
-Configure multi-tenancy in your configuration:
+For complex operations that span multiple databases, you can use the transaction manager:
 
 ```javascript
-{
-  "multiTenant": {
-    "enabled": true,
-    "databaseStrategy": "schema", // "separate", "schema", or "column"
-    "tenantIdField": "tenant_id" // For column strategy
-  }
+const { transaction } = require('universal-backend-engine');
+
+async function transferUserData(userId) {
+  await transaction.run(async (tx) => {
+    // Get user from PostgreSQL
+    const user = await tx.postgres.query('SELECT * FROM users WHERE id = $1', [userId]);
+    
+    // Store in MongoDB
+    await tx.mongodb.collection('users').insertOne(user.rows[0]);
+    
+    // Update cache in Redis
+    await tx.redis.set(`user:${userId}`, JSON.stringify(user.rows[0]), 'EX', 3600);
+    
+    // If any operation fails, all will be rolled back (when supported)
+  });
 }
 ```
 
-## Transactions
+## Database Adapters
 
-Database transactions are supported for atomic operations:
-
-```javascript
-const { getTransaction } = require('../core/database');
-
-async function transferFunds(fromAccountId, toAccountId, amount) {
-  const transaction = await getTransaction();
-  
-  try {
-    // Start transaction
-    await transaction.begin();
-    
-    // Perform operations
-    await transaction.query(
-      'UPDATE accounts SET balance = balance - $1 WHERE id = $2',
-      [amount, fromAccountId]
-    );
-    
-    await transaction.query(
-      'UPDATE accounts SET balance = balance + $1 WHERE id = $2',
-      [amount, toAccountId]
-    );
-    
-    // Commit transaction
-    await transaction.commit();
-    
-    return true;
-  } catch (error) {
-    // Rollback on error
-    await transaction.rollback();
-    throw error;
-  }
-}
-```
+Universal Backend Engine uses adapters to normalize the interface for different database types. You can create custom adapters for additional database systems by implementing the adapter interface.

@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const { MockDatabase } = require('../src/core/database/mock');
+const { MockDatabase } = require('../../src/core/database/mock');
 
 // Create a mock Express app instead of using the real server
 const app = express();
