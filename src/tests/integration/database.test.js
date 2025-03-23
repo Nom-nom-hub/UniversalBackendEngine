@@ -1,5 +1,5 @@
 const { connectDatabases } = require('../../core/database');
-const MockDatabase = require('../../core/database/mock');
+const { MockDatabase } = require('../../core/database/mock');
 
 describe('Database Integration', () => {
   let connections;

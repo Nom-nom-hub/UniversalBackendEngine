@@ -13,7 +13,8 @@ module.exports = {
     '**/src/tests/**/*.test.js'
   ],
   moduleNameMapper: {
-    '@grpc/grpc-js': '<rootDir>/src/core/api-generators/__mocks__/grpc.js'
+    '@grpc/grpc-js': '<rootDir>/src/core/api-generators/__mocks__/grpc.js',
+    'prom-client': '<rootDir>/src/middleware/__mocks__/prom-client.js'
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
 }; 

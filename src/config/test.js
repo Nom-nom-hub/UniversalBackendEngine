@@ -97,4 +97,19 @@ module.exports = {
   cache: {
     enabled: false
   }
-}; 
+};
+
+const { loadConfig, defaultConfig } = require('./index');
+
+describe('Config Module', () => {
+  test('should load default config', () => {
+    const config = loadConfig();
+    expect(config).toBeDefined();
+    expect(config.server).toBeDefined();
+  });
+  
+  test('should have default values', () => {
+    expect(defaultConfig).toBeDefined();
+    expect(defaultConfig.server.port).toBeDefined();
+  });
+}); 
