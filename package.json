@@ -20,7 +20,8 @@
     "test:load": "artillery run src/tests/load/load-test.yml",
     "security:scan": "node src/tests/security/security-scan.js",
     "ci": "npm run lint && npm run test:unit && npm run test:integration && npm run test:coverage && npm run security:scan",
-    "create-migration": "node src/scripts/create-migration.js"
+    "create-migration": "node src/scripts/create-migration.js",
+    "test:mock": "NODE_ENV=test MOCK_DB=true jest"
   },
   "engines": {
     "node": ">=14.0.0"

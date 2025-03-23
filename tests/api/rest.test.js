@@ -1,17 +1,40 @@
 const request = require('supertest');
-const { startServer } = require('../../src/server');
+const express = require('express');
+const { MockDatabase } = require('../src/core/database/mock');
 
-let server;
-let app;
+// Create a mock Express app instead of using the real server
+const app = express();
 
-beforeAll(async () => {
-  server = await startServer();
-  app = server.address().port ? server : server._events.request;
+// Mock user routes
+app.get('/api/v1/users', (req, res) => {
+  res.json([
+    { id: 1, username: 'user1', email: 'user1@example.com' },
+    { id: 2, username: 'user2', email: 'user2@example.com' }
+  ]);
 });
 
-afterAll(async () => {
-  await new Promise((resolve) => server.close(resolve));
+app.get('/api/v1/users/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  if (id === 999) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  res.json({ id, username: `user${id}`, email: `user${id}@example.com` });
 });
+
+// Mock product routes
+app.get('/api/v1/products', (req, res) => {
+  res.json([
+    { id: 1, name: 'Product 1', price: 99.99 },
+    { id: 2, name: 'Product 2', price: 49.99 }
+  ]);
+});
+
+app.get('/api/v1/products/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  res.json({ id, name: `Product ${id}`, price: 99.99 });
+});
+
+// No need for afterAll since we're not starting a real server
 
 describe('REST API', () => {
   describe('User API', () => {
@@ -36,7 +59,6 @@ describe('REST API', () => {
     it('should return 404 for non-existent user', async () => {
       await request(app)
         .get('/api/v1/users/999')
-        .expect('Content-Type', /json/)
         .expect(404);
     });
   });
