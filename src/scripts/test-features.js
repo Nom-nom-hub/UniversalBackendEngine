@@ -10,6 +10,11 @@ const WorkflowEngine = require('../core/workflow');
 const AuditManager = require('../core/audit');
 const EdgeComputingManager = require('../core/edge');
 
+// Add these variables at the top of the file
+let passed = 0;
+let failed = 0;
+let startTime = Date.now();
+
 /**
  * Test all advanced features
  */
@@ -52,6 +57,15 @@ async function testFeatures() {
     
     // Close database connections
     await closeConnections(connections);
+    
+    // Calculate total time
+    const totalTime = Date.now() - startTime;
+
+    // Replace the console.log with logger
+    logger.info(
+      `Feature test complete. ${passed} tests passed, ${failed} tests failed. ` +
+      `Total execution time: ${totalTime}ms`
+    );
     
     process.exit(0);
   } catch (error) {

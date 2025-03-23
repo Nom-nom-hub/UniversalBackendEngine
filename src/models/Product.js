@@ -28,10 +28,10 @@ const Product = {
     // Get product by ID
     getById: async (req, res) => {
       try {
-        const { id } = req.params;
+        const { _id } = req.params;
         
         // In a real implementation, you would fetch the product from the database
-        const product = { id: parseInt(id), name: `Product ${id}`, price: 99.99, category: 'Electronics' };
+        const product = { id: parseInt(_id), name: `Product ${_id}`, price: 99.99, category: 'Electronics' };
         
         if (!product) {
           return res.status(404).json({ error: 'Product not found' });
@@ -67,11 +67,11 @@ const Product = {
     // Update a product
     update: [isAuthenticated, hasRoles(['admin']), async (req, res) => {
       try {
-        const { id } = req.params;
+        const { _id } = req.params;
         const { name, price, category } = req.body;
         
         // In a real implementation, you would update the product in the database
-        const product = { id: parseInt(id), name, price, category };
+        const product = { id: parseInt(_id), name, price, category };
         
         res.json(product);
       } catch (error) {
@@ -83,7 +83,7 @@ const Product = {
     // Delete a product
     delete: [isAuthenticated, hasRoles(['admin']), async (req, res) => {
       try {
-        const { id } = req.params;
+        const { _id } = req.params;
         
         // In a real implementation, you would delete the product from the database
         
@@ -120,7 +120,7 @@ const Product = {
         path: '/search',
         handler: async (req, res) => {
           try {
-            const { query } = req.query;
+            const { _query } = req.query;
             
             // In a real implementation, you would search products in the database
             const products = [
@@ -180,9 +180,9 @@ const Product = {
           ];
         },
         
-        product: async (_, { id }) => {
+        product: async (_, { _id }) => {
           // In a real implementation, you would fetch the product from the database
-          return { id, name: `Product ${id}`, price: 99.99, category: 'Electronics' };
+          return { id: parseInt(_id), name: `Product ${_id}`, price: 99.99, category: 'Electronics' };
         },
         
         productsByCategory: async (_, { category }) => {

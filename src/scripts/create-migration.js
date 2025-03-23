@@ -8,7 +8,7 @@ async function main() {
     
     if (args.length === 0) {
       logger.error('Migration name is required');
-      console.log('Usage: npm run create-migration <name> [database]');
+      logger.info('Usage: npm run create-migration <name> [database]');
       process.exit(1);
     }
     
@@ -17,7 +17,7 @@ async function main() {
     
     // Create migration
     const fileName = createMigration(name, database);
-    logger.info(`Migration created: ${fileName}`);
+    logger.info(`Migration file created: ${fileName}`);
   } catch (error) {
     logger.error('Failed to create migration:', error);
     process.exit(1);

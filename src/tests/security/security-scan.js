@@ -291,7 +291,7 @@ class SecurityScanner {
 // Run the scanner if executed directly
 if (require.main === module) {
   const scanner = new SecurityScanner();
-  scanner.runAllScans().catch(console.error);
+  scanner.runAllScans().catch((error) => logger.error('Security scan error:', error));
 }
 
 module.exports = SecurityScanner; 

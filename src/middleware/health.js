@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDatabaseClient } = require('../core/database');
+const { _getDatabaseClient } = require('../core/database');
 
 /**
  * Health check middleware

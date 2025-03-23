@@ -1,5 +1,6 @@
 const { performance } = require('perf_hooks');
 const axios = require('axios');
+const logger = require('../../core/utils/logger');
 
 // Configuration
 const config = {
@@ -111,4 +112,4 @@ function calculatePercentile(values, percentile) {
 }
 
 // Run the tests
-runPerformanceTests().catch(console.error); 
+runPerformanceTests().catch((error) => logger.error('Performance test error:', error)); 

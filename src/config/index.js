@@ -136,7 +136,7 @@ function deepMerge(target, source) {
   const output = { ...target };
   
   if (isObject(target) && isObject(source)) {
-    Object.keys(source).forEach(key => {
+    Object.keys(source).forEach((key) => {
       if (isObject(source[key])) {
         if (!(key in target)) {
           Object.assign(output, { [key]: source[key] });

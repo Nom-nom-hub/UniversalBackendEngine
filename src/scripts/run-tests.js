@@ -28,7 +28,7 @@ async function runTests() {
     
     // Make sure all database configs have mock enabled for tests
     if (config.databases) {
-      Object.keys(config.databases).forEach(dbType => {
+      Object.keys(config.databases).forEach((dbType) => {
         if (config.databases[dbType]) {
           config.databases[dbType].mock = true;
         }
@@ -128,7 +128,7 @@ async function testSecurity(config, connections) {
     `);
     
     // Run a scan
-    const report = await securityScanner.runScan();
+    const _report = await securityScanner.runScan();
     
     // Clean up test file
     await fs.unlink(testFile);
@@ -209,7 +209,7 @@ async function testEvents(config, connections) {
     await eventManager.publish('test.event', { test: true });
     
     // Wait for event to be processed
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
     
     if (!eventReceived) {
       throw new Error('Event was not received by handler');

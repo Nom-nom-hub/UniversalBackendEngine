@@ -27,10 +27,10 @@ const User = {
     // Get user by ID
     getById: async (req, res) => {
       try {
-        const { id } = req.params;
+        const { _id } = req.params;
         
         // In a real implementation, you would fetch the user from the database
-        const user = { id: parseInt(id), username: `user${id}`, email: `user${id}@example.com` };
+        const user = { id: parseInt(_id), username: `user${_id}`, email: `user${_id}@example.com` };
         
         if (!user) {
           return res.status(404).json({ error: 'User not found' });
@@ -46,10 +46,10 @@ const User = {
     // Create a new user
     create: async (req, res) => {
       try {
-        const { username, email, password } = req.body;
+        const { username, email, _password } = req.body;
         
         // Validate input
-        if (!username || !email || !password) {
+        if (!username || !email || !_password) {
           return res.status(400).json({ error: 'Username, email, and password are required' });
         }
         
@@ -66,11 +66,11 @@ const User = {
     // Update a user
     update: async (req, res) => {
       try {
-        const { id } = req.params;
+        const { _id } = req.params;
         const { username, email } = req.body;
         
         // In a real implementation, you would update the user in the database
-        const user = { id: parseInt(id), username, email };
+        const user = { id: parseInt(_id), username, email };
         
         res.json(user);
       } catch (error) {
@@ -82,7 +82,7 @@ const User = {
     // Delete a user
     delete: async (req, res) => {
       try {
-        const { id } = req.params;
+        const { _id } = req.params;
         
         // In a real implementation, you would delete the user from the database
         
@@ -169,9 +169,9 @@ const User = {
           ];
         },
         
-        user: async (_, { id }) => {
+        user: async (_, { _id }) => {
           // In a real implementation, you would fetch the user from the database
-          return { id, username: `user${id}`, email: `user${id}@example.com`, roles: ['user'] };
+          return { id: _id, username: `user${_id}`, email: `user${_id}@example.com`, roles: ['user'] };
         },
         
         me: async (_, __, { req }) => {
@@ -186,7 +186,7 @@ const User = {
       },
       
       Mutation: {
-        createUser: async (_, { username, email, password }) => {
+        createUser: async (_, { username, email, _password }) => {
           // In a real implementation, you would create the user in the database
           return { id: 3, username, email, roles: ['user'] };
         },
