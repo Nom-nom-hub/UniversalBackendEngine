@@ -1,36 +1,53 @@
 # Configuration
 
-Universal Backend Engine is highly configurable to adapt to different project requirements.
+Universal Backend Engine can be configured through a variety of methods to suit your needs.
 
 ## Configuration Methods
 
-There are three ways to configure the engine:
+1. **Environment Variables**: Set environment variables to configure the engine
+2. **Configuration File**: Create a `config.json` file in your project root
+3. **Programmatic Configuration**: Pass configuration options when creating the server
 
-1. **Environment Variables**: Using `.env` file or system environment variables
-2. **Configuration Files**: Using `config.json` in the root directory
-3. **Programmatic Configuration**: Directly in code
-
-## Core Configuration Options
-
-### API Configuration
+## Basic Configuration Options
 
 ```javascript
 {
-  "api": {
+  // Server configuration
+  "server": {
+    "port": 3000,
+    "host": "0.0.0.0",
+    "cors": {
+      "origin": "*",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    }
+  },
+  
+  // Database configuration
+  "databases": {
+    "postgres": {
+      "url": "postgresql://user:password@localhost:5432/mydb",
+      "poolSize": 10
+    },
+    "mongodb": {
+      "url": "mongodb://localhost:27017/mydb"
+    },
+    "redis": {
+      "url": "redis://localhost:6379"
+    }
+  },
+  
+  // API configuration
+  "apis": {
     "rest": {
       "enabled": true,
-      "basePath": "/api",
-      "version": "v1",
-      "documentation": true
+      "prefix": "/api"
     },
     "graphql": {
       "enabled": true,
-      "introspection": true,
-      "playground": true
+      "path": "/graphql"
     },
     "websocket": {
-      "enabled": true,
-      "path": "/ws"
+      "enabled": true
     },
     "grpc": {
       "enabled": false,
@@ -40,88 +57,10 @@ There are three ways to configure the engine:
 }
 ```
 
-### Database Configuration
-
-```javascript
-{
-  "database": {
-    "default": "postgres",
-    "postgres": {
-      "host": "localhost",
-      "port": 5432,
-      "user": "postgres",
-      "password": "postgres",
-      "database": "universal_backend"
-    },
-    "mongodb": {
-      "uri": "mongodb://localhost:27017/universal_backend"
-    }
-  }
-}
-```
-
-### Authentication Configuration
-
-```javascript
-{
-  "auth": {
-    "jwt": {
-      "secret": "your-secret-key",
-      "expiresIn": "1d"
-    },
-    "oauth": {
-      "enabled": false,
-      "providers": []
-    },
-    "apiKey": {
-      "enabled": true
-    }
-  }
-}
-```
-
-### SDK Generation Configuration
-
-```javascript
-{
-  "sdkGeneration": {
-    "enabled": true,
-    "targets": ["react", "nextjs", "flutter", "unity", "vue"]
-  }
-}
-```
-
-## Environment Variables
-
-Key environment variables include:
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Server port | `3000` |
-| `NODE_ENV` | Environment (development/production) | `development` |
-| `JWT_SECRET` | Secret for JWT tokens | - |
-| `POSTGRES_HOST` | PostgreSQL host | `localhost` |
-| `POSTGRES_PORT` | PostgreSQL port | `5432` |
-| `POSTGRES_USER` | PostgreSQL username | `postgres` |
-| `POSTGRES_PASSWORD` | PostgreSQL password | - |
-| `POSTGRES_DB` | PostgreSQL database name | `universal_backend` |
-| `REDIS_HOST` | Redis host | `localhost` |
-| `REDIS_PORT` | Redis port | `6379` |
-| `LOG_LEVEL` | Logging level | `info` |
-
-## Loading Configuration
-
-The engine loads configuration in the following order:
-
-1. Default configuration
-2. Configuration file (`config.json`)
-3. Environment variables (overrides previous settings)
-
-```javascript
-// Example of loading configuration
-const config = loadConfig();
-```
-
 ## Advanced Configuration
 
-For advanced use cases, you can extend the configuration by creating custom configuration files in the `src/config` directory.
+For advanced configuration options, see the following sections:
+
+- [Security Configuration](security.md)
+- [Multi-tenant Configuration](multi-tenancy.md)
+- [Workflow Configuration](workflow.md)
