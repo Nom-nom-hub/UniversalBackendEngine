@@ -63,6 +63,62 @@ async function connectMockDatabase(config) {
   }
 }
 
+/**
+ * Mock database connections for testing
+ */
+class MockDatabase {
+  static createMockMongoDB() {
+    const collections = new Map();
+    
+    return {
+      collection: (name) => {
+        if (!collections.has(name)) {
+          collections.set(name, []);
+        }
+        
+        return {
+          insertOne: async (doc) => {
+            const id = Math.random().toString(36).substring(2, 15);
+            const newDoc = { ...doc, _id: doc._id || id };
+            collections.get(name).push(newDoc);
+            return { insertedId: newDoc._id };
+          },
+          findOne: async (query = {}) => {
+            return collections.get(name)[0] || null;
+          },
+          find: () => ({
+            toArray: async () => collections.get(name) || []
+          }),
+          updateOne: async () => ({ modifiedCount: 1 }),
+          deleteOne: async () => ({ deletedCount: 1 })
+        };
+      },
+      close: async () => {}
+    };
+  }
+  
+  static createMockRedis() {
+    const store = new Map();
+    
+    return {
+      set: async (key, value) => {
+        store.set(key, value);
+        return 'OK';
+      },
+      get: async (key) => {
+        return store.get(key) || null;
+      },
+      del: async (key) => {
+        store.delete(key);
+        return 1;
+      },
+      quit: async () => {},
+      on: () => {}
+    };
+  }
+}
+
 module.exports = {
-  connect: connectMockDatabase
+  connect: connectMockDatabase,
+  MockDatabase
 }; 
